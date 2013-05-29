@@ -1,0 +1,1195 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WP7_Barcode_Library</name>
+    </assembly>
+    <members>
+        <member name="T:WP7_Barcode_Library.BarcodePhotoChooser">
+            <summary>
+            Page used to display a list of sample barcode images and let the user select which one they want to use.
+            </summary>
+        </member>
+        <member name="M:WP7_Barcode_Library.BarcodePhotoChooser.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:WP7_Common_Code.Delay.LowProfileImageLoader">
+            <summary>
+            Provides access to the Image.UriSource attached property which allows
+            Images to be loaded by Windows Phone with less impact to the UI thread.
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.Delay.LowProfileImageLoader.GetUriSource(System.Windows.Controls.Image)">
+            <summary>
+            Gets the value of the Uri to use for providing the contents of the Image's Source property.
+            </summary>
+            <param name="obj">Image needing its Source property set.</param>
+            <returns>Uri to use for providing the contents of the Source property.</returns>
+        </member>
+        <member name="M:WP7_Common_Code.Delay.LowProfileImageLoader.SetUriSource(System.Windows.Controls.Image,System.Uri)">
+            <summary>
+            Sets the value of the Uri to use for providing the contents of the Image's Source property.
+            </summary>
+            <param name="obj">Image needing its Source property set.</param>
+            <param name="value">Uri to use for providing the contents of the Source property.</param>
+        </member>
+        <member name="F:WP7_Common_Code.Delay.LowProfileImageLoader.UriSourceProperty">
+            <summary>
+            Identifies the UriSource attached DependencyProperty.
+            </summary>
+        </member>
+        <member name="P:WP7_Common_Code.Delay.LowProfileImageLoader.IsEnabled">
+            <summary>
+            Gets or sets a value indicating whether low-profile image loading is enabled.
+            </summary>
+        </member>
+        <member name="T:WP7_Barcode_Library.BarcodeTypeItem">
+            <summary>
+            Stores information about each barcode type. Can be for data binding in ListPicker or ListBox.
+            Each item represents a single barcode type or a group of types (ex: 'UPC or EAN', 'All 1D')
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeTypeItem.Name">
+            <summary>
+            Name of barcode type. Used for binding to text description
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeTypeItem.Filename">
+            <summary>
+            Path to the icon image.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeTypeItem.FileURI">
+            <summary>
+            Full URI to icon image.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeTypeItem.SampleImage">
+            <summary>
+            BitmapImage of icon. Note: FileURI must be set before this is available.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeTypeItem.isEnabled">
+            <summary>
+            Used to enable or disable this barcode type.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeTypeItem.Visible">
+            <summary>
+            Binding used to hide barcode types that are not enabled. Should be set on the grid or stack panel of the DataTemplate for ListBox or ListPicker control.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeTypeItem.BarcodeType">
+            <summary>
+            The BarcodeFormat as defined by ZXing
+            </summary>
+        </member>
+        <member name="T:WP7_Barcode_Library.BarcodeTypeManager">
+            <summary>
+            Initializes the list of BarcodeTypes and can be used as the datacontext for ListPicker or ListBox
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeTypeManager.Current">
+            <summary>
+            Used to access the current instance of this class.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeTypeManager.BarcodeTypes">
+            <summary>
+            List of BarcodeTypes that can be used as the data context for ListPicker or ListBox controls
+            </summary>
+        </member>
+        <member name="T:WP7_Barcode_Library.CaptureState">
+            <summary>
+            Represents the current state of the barcode capture process
+            </summary>
+        </member>
+        <member name="T:WP7_Barcode_Library.BarcodeCaptureResult">
+            <summary>
+            Represents the results of a barcode scan. Most recent barcode scan will be stored to WP7Manager.LastCaptureResults
+            </summary>
+        </member>
+        <member name="F:WP7_Barcode_Library.BarcodeCaptureResult.SaveOriginalImage">
+            <summary>
+            Indicates if the Original fullsize image should be saved to OrginalImage (used for debugging). 
+            A VGA quality image will be used for BarcodeImage and wbBarcodeImage.
+            NOTE: the original image will NOT be persisted across sessions, only the VGA image is stored.
+            </summary>
+        </member>
+        <member name="M:WP7_Barcode_Library.BarcodeCaptureResult.#ctor">
+            <summary>
+            Default constructor. Object will be left in the Initializing state, which should be changed to Success/Failed/Unknown when finished processing.
+            </summary>
+        </member>
+        <member name="M:WP7_Barcode_Library.BarcodeCaptureResult.#ctor(System.Windows.Media.Imaging.BitmapImage)">
+            <summary>
+            Creates a new result object using an existing image loaded from IsolatedStorage or from the XAP file.
+            <para>NOTE: if you have access to the original photo stream then BarcodeCaptureResult(System.IO.Stream ImageStream)
+            is preferred as it will be able to save a High-Resolution version of the image (BitmapImage is limited to 1MP)</para>
+            </summary>
+            <param name="bmpBarcodeImage">BitmapImage of barcode</param>
+        </member>
+        <member name="M:WP7_Barcode_Library.BarcodeCaptureResult.#ctor(System.IO.Stream)">
+            <summary>
+            Creates a new result object using a stream to a JPEG image. Most often this would be e.ChosenPhoto from the Camera PhotoResult, but could also be an Application.GetResourceStream
+            </summary>
+            <param name="ImageStream">e.ChosenPhoto from the Camera PhotoResult, but could also be an Application.GetResourceStream</param>
+        </member>
+        <member name="F:WP7_Barcode_Library.BarcodeCaptureResult.VGABarcodeImage">
+            <summary>
+            VGA resolution version of BarcodeImage that will be used for processing
+            </summary>
+        </member>
+        <member name="F:WP7_Barcode_Library.BarcodeCaptureResult.wbBarcodeImage">
+            <summary>
+            Cache used to store writeable bitmap version of BarcodeImage. 
+            Note: image should be Small for good performance (640 x 480 or 1MP seems optimal)
+            </summary>
+        </member>
+        <member name="F:WP7_Barcode_Library.BarcodeCaptureResult.isReadyForProcessing">
+            <summary>
+            Used to make sure images are loaded before we start processing
+            </summary>
+        </member>
+        <member name="F:WP7_Barcode_Library.BarcodeCaptureResult.ExceptionThrown">
+            <summary>
+            Last exception that was thrown. Usually this is a reader exception from zxing indicating the barcode could not be detected.
+            </summary>
+        </member>
+        <member name="M:WP7_Barcode_Library.BarcodeCaptureResult.SaveJPEGToIsolatedStorage(System.String)">
+            <summary>
+            Saves the current Barcode Image to IsolatedStorage using the given filename. 
+            Also the Filename property for this object will be updated with the new value.
+            </summary>
+            <param name="strFilename">Path and filename for where to put the image in IsolatedStorage</param>
+        </member>
+        <member name="M:WP7_Barcode_Library.BarcodeCaptureResult.LoadJPEGFromIsolatedStorage(System.String)">
+            <summary>
+            Loads BarcodeImage from IsolatedStorage using the given filename. 
+            Also the Filename property will be updated with the new value.
+            NOTE: BarcodeText, result and ErrorMessage will NOT be set. Also this must be called from the UI thread.
+            </summary>
+            <param name="strFilename">Path and filename for where to load the image from IsolatedStorage</param>
+        </member>
+        <member name="M:WP7_Barcode_Library.BarcodeCaptureResult.SetupBarcodeImages(System.IO.Stream)">
+            <summary>
+            This method will setup the OriginalImage, VGABarcodeImage, and wbBarcodeImage values. It will also rotate the image if it was taken in portrait mode.
+            </summary>
+            <param name="ImageStream">Optional Stream to the original image (Use Camera PhotoResult or Application.GetResourceStream). Will use BarcodeImage.UriSource if omitted.</param>
+        </member>
+        <member name="M:WP7_Barcode_Library.BarcodeCaptureResult.GetWriteableBitmap(System.Int32,System.Int32,System.IO.Stream)">
+            <summary>
+            Converts the current Image into a WriteableBitmap.
+            This method will be dispatched to the UI thread if called from a background thread.
+            </summary>
+            <param name="Width">Width of desired return image (Required)</param>
+            <param name="Height">Optional height of return image. Will maintain original aspect ratio if Height == 0.</param>
+            <param name="ImageStream">Optional stream to original image (Use Camera PhotoResult or Application.GetResourceStream). Will use BarcodeImage.UriSource if omitted.</param>
+        </member>
+        <member name="M:WP7_Barcode_Library.BarcodeCaptureResult.ProcessValue">
+            <summary>
+            Used to detect special value types such as URLs and (eventually) Phone numbers.
+            This method should be called whenever the BarcodeText is updated (ex: manual entry)
+            </summary>
+        </member>
+        <member name="F:WP7_Barcode_Library.BarcodeCaptureResult._URI">
+            <summary>
+            URI found in barcode text or null if no URI was found
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeCaptureResult.BarcodeImage">
+            <summary>
+            Image of the barcode. When using the camera this is initialized using BarcodeImage.SetSource(e.ChosenPhoto) and is available immediatly (Other images are queued for processing);
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeCaptureResult.OriginalImage">
+            <summary>
+            Stores the original full size image when SaveOriginalImage == true, or null otherwise.
+            NOTE: the original image will NOT be persisted across sessions, only the VGA image is stored.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeCaptureResult.State">
+            <summary>
+            Success, ScanFailed, UnknownError, Canceled, ...
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeCaptureResult.ErrorMessage">
+            <summary>
+            Error message if State was not Success or "" if it was successfull
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeCaptureResult.BarcodeText">
+            <summary>
+            Text results of the barcode or "" if unable to process image. If BarcodeText is edited you should call Call ProcessValue() to detect special types.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeCaptureResult.Filename">
+            <summary>
+            Filename where barcode is stored in isolated storage
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeCaptureResult.ExifInfo">
+            <summary>
+            Stores information about the JPEG image generated using the ExifLib
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeCaptureResult.BarcodeFormat">
+            <summary>
+            Type of barcode user indicated should be scanned. NOTE this might be a multi-reader like "UPC or EAN"
+            </summary>
+        </member>
+        <member name="T:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl">
+            <summary>
+            A very specialized primitive control that works around a specific visual
+            state manager issue. The platform does not support relative sized
+            translation values, and this special control walks through visual state
+            animation storyboards looking for magic numbers to use as percentages.
+            This control is not supported, unofficial, and is a hack in many ways.
+            It is used to enable a Windows Phone native platform-style progress bar
+            experience in indeterminate mode that remains performant.
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.SimpleDoubleComparisonEpsilon">
+            <summary>
+            A simple Epsilon-style value used for trying to determine the magic 
+            state, if any, of a double.
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl._knownWidth">
+            <summary>
+            The last known width of the control.
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl._knownHeight">
+            <summary>
+            The last known height of the control.
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl._specialAnimations">
+            <summary>
+            A set of custom animation adapters used to update the animation
+            storyboards when the size of the control changes.
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.#ctor">
+            <summary>
+            Initializes a new instance of the RelativeAnimatingContentControl
+            type.
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.OnSizeChanged(System.Object,System.Windows.SizeChangedEventArgs)">
+            <summary>
+            Handles the size changed event.
+            </summary>
+            <param name="sender">The source object.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.UpdateAnyAnimationValues">
+            <summary>
+            Walks through the known storyboards in the control's template that
+            may contain magic double animation values, storing them for future
+            use and updates.
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.UpdateKnownAnimations">
+            <summary>
+            Walks through all special animations, updating based on the current
+            size of the control.
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.ProcessDoubleAnimationWithKeys(System.Windows.Media.Animation.DoubleAnimationUsingKeyFrames)">
+            <summary>
+            Processes a double animation with keyframes, looking for known 
+            special values to store with an adapter.
+            </summary>
+            <param name="da">The double animation using key frames instance.</param>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.ProcessDoubleAnimation(System.Windows.Media.Animation.DoubleAnimation)">
+            <summary>
+            Processes a double animation looking for special values.
+            </summary>
+            <param name="da">The double animation instance.</param>
+        </member>
+        <member name="T:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationDimension">
+            <summary>
+            A selection of dimensions of interest for updating an animation.
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationDimension.Width">
+            <summary>
+            The width (horizontal) dimension.
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationDimension.Height">
+            <summary>
+            The height (vertical) dimension.
+            </summary>
+        </member>
+        <member name="T:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.AnimationValueAdapter">
+            <summary>
+            A simple class designed to store information about a specific 
+            animation instance and its properties. Able to update the values at
+            runtime.
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.AnimationValueAdapter.#ctor(WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationDimension)">
+            <summary>
+            Initializes a new instance of the AnimationValueAdapter type.
+            </summary>
+            <param name="dimension">The dimension of interest for updates.</param>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.AnimationValueAdapter.UpdateWithNewDimension(System.Double,System.Double)">
+            <summary>
+            Updates the original instance based on new dimension information
+            from the control. Takes both and allows the subclass to make the
+            decision on which ratio, values, and dimension to use.
+            </summary>
+            <param name="width">The width of the control.</param>
+            <param name="height">The height of the control.</param>
+        </member>
+        <member name="P:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.AnimationValueAdapter.OriginalValue">
+            <summary>
+            Gets or sets the original double value.
+            </summary>
+        </member>
+        <member name="P:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.AnimationValueAdapter.Dimension">
+            <summary>
+            Gets the dimension of interest for the control.
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.GetValue">
+            <summary>
+            Gets the value of the underlying property of interest.
+            </summary>
+            <returns>Returns the value of the property.</returns>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.SetValue(System.Double)">
+            <summary>
+            Sets the value for the underlying property of interest.
+            </summary>
+            <param name="newValue">The new value for the property.</param>
+        </member>
+        <member name="F:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1._ratio">
+            <summary>
+            The ratio based on the original magic value, used for computing
+            the updated animation property of interest when the size of the
+            control changes.
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.#ctor(WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationDimension,`0)">
+            <summary>
+            Initializes a new instance of the GeneralAnimationValueAdapter
+            type.
+            </summary>
+            <param name="d">The dimension of interest.</param>
+            <param name="instance">The animation type instance.</param>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.StripMagicNumberOff(System.Double)">
+            <summary>
+            Approximately removes the magic number state from a value.
+            </summary>
+            <param name="number">The initial number.</param>
+            <returns>Returns a double with an adjustment for the magic
+            portion of the number.</returns>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.GetDimensionFromMagicNumber(System.Double)">
+            <summary>
+            Retrieves the dimension, if any, from the number. If the number
+            is not magic, null is returned instead.
+            </summary>
+            <param name="number">The double value.</param>
+            <returns>Returs a double animation dimension, if the number was
+            partially magic; otherwise, returns null.</returns>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.UpdateWithNewDimension(System.Double,System.Double)">
+            <summary>
+            Updates the animation instance based on the dimensions of the
+            control.
+            </summary>
+            <param name="width">The width of the control.</param>
+            <param name="height">The height of the control.</param>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.UpdateValue(System.Double)">
+            <summary>
+            Updates the value of the property.
+            </summary>
+            <param name="sizeToUse">The size of interest to use with a ratio
+            computation.</param>
+        </member>
+        <member name="P:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.Instance">
+            <summary>
+            Stores the animation instance.
+            </summary>
+        </member>
+        <member name="P:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.InitialValue">
+            <summary>
+            Gets the initial value (minus the magic number portion) that the
+            designer stored within the visual state animation property.
+            </summary>
+        </member>
+        <member name="T:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationToAdapter">
+            <summary>
+            Adapter for DoubleAnimation's To property.
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationToAdapter.GetValue">
+            <summary>
+            Gets the value of the underlying property of interest.
+            </summary>
+            <returns>Returns the value of the property.</returns>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationToAdapter.SetValue(System.Double)">
+            <summary>
+            Sets the value for the underlying property of interest.
+            </summary>
+            <param name="newValue">The new value for the property.</param>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationToAdapter.#ctor(WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationDimension,System.Windows.Media.Animation.DoubleAnimation)">
+            <summary>
+            Initializes a new instance of the DoubleAnimationToAdapter type.
+            </summary>
+            <param name="dimension">The dimension of interest.</param>
+            <param name="instance">The instance of the animation type.</param>
+        </member>
+        <member name="T:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationFromAdapter">
+            <summary>
+            Adapter for DoubleAnimation's From property.
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationFromAdapter.GetValue">
+            <summary>
+            Gets the value of the underlying property of interest.
+            </summary>
+            <returns>Returns the value of the property.</returns>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationFromAdapter.SetValue(System.Double)">
+            <summary>
+            Sets the value for the underlying property of interest.
+            </summary>
+            <param name="newValue">The new value for the property.</param>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationFromAdapter.#ctor(WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationDimension,System.Windows.Media.Animation.DoubleAnimation)">
+            <summary>
+            Initializes a new instance of the DoubleAnimationFromAdapter 
+            type.
+            </summary>
+            <param name="dimension">The dimension of interest.</param>
+            <param name="instance">The instance of the animation type.</param>
+        </member>
+        <member name="T:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationFrameAdapter">
+            <summary>
+            Adapter for double key frames.
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationFrameAdapter.GetValue">
+            <summary>
+            Gets the value of the underlying property of interest.
+            </summary>
+            <returns>Returns the value of the property.</returns>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationFrameAdapter.SetValue(System.Double)">
+            <summary>
+            Sets the value for the underlying property of interest.
+            </summary>
+            <param name="newValue">The new value for the property.</param>
+        </member>
+        <member name="M:WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationFrameAdapter.#ctor(WP7_Common_Code.MS_Unsupported.RelativeAnimatingContentControl.DoubleAnimationDimension,System.Windows.Media.Animation.DoubleKeyFrame)">
+            <summary>
+            Initializes a new instance of the DoubleAnimationFrameAdapter
+            type.
+            </summary>
+            <param name="dimension">The dimension of interest.</param>
+            <param name="instance">The instance of the animation type.</param>
+        </member>
+        <member name="T:WP7_Common_Code.ControlTiltEffect.TiltEffect">
+            <summary>
+            This code provides attached properties for adding a 'tilt' effect to all controls within a container.
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.ControlTiltEffect.TiltEffect.MaxAngle">
+            <summary>
+            Maximum amount of tilt, in radians
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.ControlTiltEffect.TiltEffect.MaxDepression">
+            <summary>
+            Maximum amount of depression, in pixels
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.#ctor">
+            <summary>
+            This is not a constructable class, but it cannot be static because it derives from DependencyObject.
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.#cctor">
+            <summary>
+            Initialize the static properties
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.ControlTiltEffect.TiltEffect.TiltReturnAnimationDelay">
+            <summary>
+            Delay between releasing an element and the tilt release animation playing
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.ControlTiltEffect.TiltEffect.TiltReturnAnimationDuration">
+            <summary>
+            Duration of tilt release animation
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.ControlTiltEffect.TiltEffect.currentTiltElement">
+            <summary>
+            The control that is currently being tilted
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.ControlTiltEffect.TiltEffect.tiltReturnStoryboard">
+            <summary>
+            The single instance of a storyboard used for all tilts
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.ControlTiltEffect.TiltEffect.tiltReturnXAnimation">
+            <summary>
+            The single instance of an X rotation used for all tilts
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.ControlTiltEffect.TiltEffect.tiltReturnYAnimation">
+            <summary>
+            The single instance of a Y rotation used for all tilts
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.ControlTiltEffect.TiltEffect.tiltReturnZAnimation">
+            <summary>
+            The single instance of a Z depression used for all tilts
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.ControlTiltEffect.TiltEffect.currentTiltElementCenter">
+            <summary>
+            The center of the tilt element
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.ControlTiltEffect.TiltEffect.wasPauseAnimation">
+            <summary>
+            Whether the animation just completed was for a 'pause' or not
+            </summary>
+        </member>
+        <member name="F:WP7_Common_Code.ControlTiltEffect.TiltEffect.IsTiltEnabledProperty">
+            <summary>
+            Whether the tilt effect is enabled on a container (and all its children)
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.GetIsTiltEnabled(System.Windows.DependencyObject)">
+            <summary>
+            Gets the IsTiltEnabled dependency property from an object
+            </summary>
+            <param name="source">The object to get the property from</param>
+            <returns>The property's value</returns>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.SetIsTiltEnabled(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the IsTiltEnabled dependency property on an object
+            </summary>
+            <param name="source">The object to set the property on</param>
+            <param name="value">The value to set</param>
+        </member>
+        <member name="F:WP7_Common_Code.ControlTiltEffect.TiltEffect.SuppressTiltProperty">
+            <summary>
+            Suppresses the tilt effect on a single control that would otherwise be tilted
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.GetSuppressTilt(System.Windows.DependencyObject)">
+            <summary>
+            Gets the SuppressTilt dependency property from an object
+            </summary>
+            <param name="source">The object to get the property from</param>
+            <returns>The property's value</returns>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.SetSuppressTilt(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the SuppressTilt dependency property from an object
+            </summary>
+            <param name="source">The object to get the property from</param>
+            <returns>The property's value</returns>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.OnIsTiltEnabledChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Property change handler for the IsTiltEnabled dependency property
+            </summary>
+            <param name="target">The element that the property is atteched to</param>
+            <param name="args">Event args</param>
+            <remarks>
+            Adds or removes event handlers from the element that has been (un)registered for tilting
+            </remarks>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.TiltEffect_ManipulationStarted(System.Object,System.Windows.Input.ManipulationStartedEventArgs)">
+            <summary>
+            Event handler for ManipulationStarted
+            </summary>
+            <param name="sender">sender of the event - this will be the tilt container (eg, entire page)</param>
+            <param name="e">event args</param>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.TiltEffect_ManipulationDelta(System.Object,System.Windows.Input.ManipulationDeltaEventArgs)">
+            <summary>
+            Event handler for ManipulationDelta
+            </summary>
+            <param name="sender">sender of the event - this will be the tilting object (eg a button)</param>
+            <param name="e">event args</param>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.TiltEffect_ManipulationCompleted(System.Object,System.Windows.Input.ManipulationCompletedEventArgs)">
+            <summary>
+            Event handler for ManipulationCompleted
+            </summary>
+            <param name="sender">sender of the event - this will be the tilting object (eg a button)</param>
+            <param name="e">event args</param>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.TryStartTiltEffect(System.Windows.FrameworkElement,System.Windows.Input.ManipulationStartedEventArgs)">
+            <summary>
+            Checks if the manipulation should cause a tilt, and if so starts the tilt effect
+            </summary>
+            <param name="source">The source of the manipulation (the tilt container, eg entire page)</param>
+            <param name="e">The args from the ManipulationStarted event</param>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.GetCenterToCenterDelta(System.Windows.FrameworkElement,System.Windows.FrameworkElement)">
+            <summary>
+            Computes the delta between the centre of an element and its container
+            </summary>
+            <param name="element">The element to compare</param>
+            <param name="container">The element to compare against</param>
+            <returns>A point that represents the delta between the two centers</returns>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.BeginTiltEffect(System.Windows.FrameworkElement,System.Windows.Point,System.Windows.Point,System.Windows.Point)">
+            <summary>
+            Begins the tilt effect by preparing the control and doing the initial animation
+            </summary>
+            <param name="element">The element to tilt </param>
+            <param name="touchPoint">The touch point, in element coordinates</param>
+            <param name="centerPoint">The center point of the element in element coordinates</param>
+            <param name="centerDelta">The delta between the <paramref name="element"/>'s center and 
+            the container's center</param>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.PrepareControlForTilt(System.Windows.FrameworkElement,System.Windows.Point)">
+            <summary>
+            Prepares a control to be tilted by setting up a plane projection and some event handlers
+            </summary>
+            <param name="element">The control that is to be tilted</param>
+            <param name="centerDelta">Delta between the element's center and the tilt container's</param>
+            <returns>true if successful; false otherwise</returns>
+            <remarks>
+            This method is conservative; it will fail any attempt to tilt a control that already
+            has a projection on it
+            </remarks>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.RevertPrepareControlForTilt(System.Windows.FrameworkElement)">
+            <summary>
+            Removes modifications made by PrepareControlForTilt
+            </summary>
+            <param name="element">THe control to be un-prepared</param>
+            <remarks>
+            This method is basic; it does not do anything to detect if the control being un-prepared
+            was previously prepared
+            </remarks>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.PrepareTiltReturnStoryboard(System.Windows.FrameworkElement)">
+            <summary>
+            Creates the tilt return storyboard (if not already created) and targets it to the projection
+            </summary>
+            <param name="projection">the projection that should be the target of the animation</param>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.ContinueTiltEffect(System.Windows.FrameworkElement,System.Windows.Input.ManipulationDeltaEventArgs)">
+            <summary>
+            Continues a tilt effect that is currently applied to an element, presumably because
+            the user moved their finger
+            </summary>
+            <param name="element">The element being tilted</param>
+            <param name="e">The manipulation event args</param>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.EndTiltEffect(System.Windows.FrameworkElement)">
+            <summary>
+            Ends the tilt effect by playing the animation  
+            </summary>
+            <param name="element">The element being tilted</param>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.TiltReturnStoryboard_Completed(System.Object,System.EventArgs)">
+            <summary>
+            Handler for the storyboard complete event
+            </summary>
+            <param name="sender">sender of the event</param>
+            <param name="e">event args</param>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.ResetTiltEffect(System.Windows.FrameworkElement)">
+            <summary>
+            Resets the tilt effect on the control, making it appear 'normal' again 
+            </summary>
+            <param name="element">The element to reset the tilt on</param>
+            <remarks>
+            This method doesn't turn off the tilt effect or cancel any current
+            manipulation; it just temporarily cancels the effect
+            </remarks>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.StopTiltReturnStoryboardAndCleanup">
+            <summary>
+            Stops the tilt effect and release resources applied to the currently-tilted control
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.PauseTiltEffect">
+            <summary>
+            Pauses the tilt effect so that the control returns to the 'at rest' position, but doesn't
+            stop the tilt effect (handlers are still attached, etc.)
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.ResetTiltReturnStoryboard">
+            <summary>
+            Resets the storyboard to not running
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.ApplyTiltEffect(System.Windows.FrameworkElement,System.Windows.Point,System.Windows.Point)">
+            <summary>
+            Applies the tilt effect to the control
+            </summary>
+            <param name="element">the control to tilt</param>
+            <param name="touchPoint">The touch point, in the container's coordinates</param>
+            <param name="centerPoint">The center point of the container</param>
+        </member>
+        <member name="P:WP7_Common_Code.ControlTiltEffect.TiltEffect.UseLogarithmicEase">
+            <summary>
+            Whether to use a slightly more accurate (but slightly slower) tilt animation easing function
+            </summary>
+        </member>
+        <member name="P:WP7_Common_Code.ControlTiltEffect.TiltEffect.TiltableItems">
+            <summary>
+            Default list of items that are tiltable
+            </summary>
+        </member>
+        <member name="T:WP7_Common_Code.ControlTiltEffect.TiltEffect.LogarithmicEase">
+            <summary>
+            Provides an easing function for the tilt return
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TiltEffect.LogarithmicEase.EaseInCore(System.Double)">
+            <summary>
+            Computes the easing function
+            </summary>
+            <param name="normalizedTime">The time</param>
+            <returns>The eased value</returns>
+        </member>
+        <member name="T:WP7_Common_Code.ControlTiltEffect.TreeHelpers">
+            <summary>
+            Couple of simple helpers for walking the visual tree
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TreeHelpers.GetVisualAncestors(System.Windows.FrameworkElement)">
+            <summary>
+            Gets the ancestors of the element, up to the root
+            </summary>
+            <param name="node">The element to start from</param>
+            <returns>An enumerator of the ancestors</returns>
+        </member>
+        <member name="M:WP7_Common_Code.ControlTiltEffect.TreeHelpers.GetVisualParent(System.Windows.FrameworkElement)">
+            <summary>
+            Gets the visual parent of the element
+            </summary>
+            <param name="node">The element to check</param>
+            <returns>The visual parent</returns>
+        </member>
+        <member name="T:WP7_Barcode_Library.WP7BarcodeManager">
+            <summary>
+            Used to initiate barcode scanning and process results from ZXing library.
+            </summary>
+        </member>
+        <member name="M:WP7_Barcode_Library.WP7BarcodeManager.#cctor">
+            <summary>
+            Initializes static variables
+            </summary>
+        </member>
+        <member name="F:WP7_Barcode_Library.WP7BarcodeManager.zxingHints">
+            <summary>
+            Used to send Try_Harder hint to ZXing multi-readers. See http://code.google.com/p/zxing/wiki/DeveloperNotes
+            </summary>
+        </member>
+        <member name="F:WP7_Barcode_Library.WP7BarcodeManager.aStartProgress">
+            <summary>
+            Delegate called to make sure progress bar is started. Better to use PhoneApplicationService.Current.State["ReturnFromSampleChooser"] and "ReturnFromCameraCapture" instead of this.
+            </summary>
+        </member>
+        <member name="M:WP7_Barcode_Library.WP7BarcodeManager.StartProgress">
+            <summary>
+            Used to invoke StartProgress delegate
+            </summary>
+        </member>
+        <member name="F:WP7_Barcode_Library.WP7BarcodeManager.aFinished">
+            <summary>
+            Stores the callback delegate that is invoked when processing is finished
+            </summary>
+        </member>
+        <member name="M:WP7_Barcode_Library.WP7BarcodeManager.ScanBarcode(System.Action{WP7_Barcode_Library.BarcodeCaptureResult})">
+            <summary>
+            Starts the phone camera so that the user can capture a photo.
+            WP7Manager.LastCaptureResults will be set to the captured image and text results.
+            Sets PhoneApplicationService.Current.State["ReturnFromCameraCapture"] flag when application is navigated to after loading photo from camera.
+            Flag should be removed once data has been processed by main thread callback (Ex: PhoneApplicationService.Current.State.Remove("ReturnFromCameraCapture");)
+            </summary>
+            <param name="Finished_Processing">Action method to call when processing is finished</param>
+        </member>
+        <member name="M:WP7_Barcode_Library.WP7BarcodeManager.ScanBarcode(System.Uri,System.Action{WP7_Barcode_Library.BarcodeCaptureResult})">
+            <summary>
+            Overloaded method that processes an existing Uri instead of using the phone's camera
+            WP7Manager.LastCaptureResults will be set to the captured image and text results.
+            </summary>
+            <param name="Finished_Processing">Action method to call when processing is finished</param>
+            <param name="UriBarcode">URI to barcode image</param>
+        </member>
+        <member name="M:WP7_Barcode_Library.WP7BarcodeManager.ScanBarcode(System.Windows.Media.Imaging.BitmapImage,System.Action{WP7_Barcode_Library.BarcodeCaptureResult})">
+            <summary>
+            Overloaded method for processing existing BitmatImage.
+            NOTE: only use this for existing images. If you have access to the URI where the photo came from (camera, resource, or content file) use other methods instead.
+            </summary>
+            <param name="imgBarcode">Barcode Image for processing</param>
+            <param name="Finished_Processing">Callback</param>
+        </member>
+        <member name="M:WP7_Barcode_Library.WP7BarcodeManager.PhotoTask_Completed(System.Object,Microsoft.Phone.Tasks.PhotoResult)">
+            <summary>
+            Callback method for processing camera results.
+            NOTE: This method will be called before the Main Page OnNavigatedTo method.
+            Sets PhoneApplicationService.Current.State["ReturnFromCameraCapture"] flag to track loading from camera.
+            Flag should be removed once data has been processed by main thread callback (Ex: PhoneApplicationService.Current.State.Remove("ReturnFromCameraCapture");)
+            </summary>
+        </member>
+        <member name="M:WP7_Barcode_Library.WP7BarcodeManager.ProcessImage">
+            <summary>
+            This code should be run on a background thread to prevent UI lockup issues.
+            For information about background threads see http://msdn.microsoft.com/en-us/library/ff967560(VS.92).aspx#BKMK_Background
+            </summary>
+        </member>
+        <member name="M:WP7_Barcode_Library.WP7BarcodeManager.SaveJPEGToIsolatedStorage(System.Windows.Media.Imaging.WriteableBitmap,System.String)">
+            <summary>
+            Saves a writeable bitmap to a specified file in isolated storage.
+            This will run on a background thread for better perfomance
+            </summary>
+            <param name="wbImage">Bitmap image to save</param>
+            <param name="strFilename">Filename to save to</param>
+        </member>
+        <member name="M:WP7_Barcode_Library.WP7BarcodeManager.LoadJPEGFromIsolatedStorage(System.String)">
+            <summary>
+            Returns a Memory stream that can be used to create a BitmapImage of an image from the isolated storage.
+            BitmapImages can only be created on the UI thread, so this method will load the data into a stream so
+            that it can be called from either the UI thread or a background thread.
+            
+            Example:
+            var ms = LoadJPEGFromIsolatedStorage("filename.jpg");
+            var bi = new BitmapImage(); //Must be called from UI thread.
+            bi.SetSource(ms);
+            </summary>
+            <param name="strFilename">Filename to save to</param>
+        </member>
+        <member name="M:WP7_Barcode_Library.WP7BarcodeManager.RotateStream(System.IO.Stream,System.Int32)">
+            <summary>
+            Used to rotate an image loaded from a stream.
+            NOTE: this creates a bitmap image, so it must be called from the UI thread
+            Code from http://timheuer.com/blog/archive/2010/09/23/working-with-pictures-in-camera-tasks-in-windows-phone-7-orientation-rotation.aspx
+            </summary>
+            <param name="stream">Stream with JPEG image</param>
+            <param name="angle">Number of degrees to rotate image</param>
+            <returns>New stream with rotated image</returns>
+        </member>
+        <member name="M:WP7_Barcode_Library.WP7BarcodeManager.GetReader">
+            <summary>
+            Returns the zxing reader class for the current specified ScanMode.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:WP7_Barcode_Library.WP7BarcodeManager.ScanMode">
+            <summary>
+            Sets the type of barcode that should be scanned. Defaults to UPC_EAN.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.WP7BarcodeManager.LastCaptureResults">
+            <summary>
+            Stores the last barcode capture results for cross-thread access
+            </summary>
+        </member>
+        <member name="T:WP7_Barcode_Library.BarcodeSampleItem">
+            <summary>
+            Stores information for each sample image. Can be for data binding in ListPicker or ListBox.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeSampleItem.Filename">
+            <summary>
+            Returns the name of the sample file. Text property will return this if text has not been set manually.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeSampleItem.FileURI">
+            <summary>
+            Returns the URI to the sample file. The URI will be generated using the FilePath if it is not set manually.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeSampleItem.FilePath">
+            <summary>
+            Path to the sample image. These should be content files but can also be resource files.
+            <para>For content files use "/Samples/Type_UPC-A.png" and store them in the parent project (cannot use content files from referenced assemblies)</para>
+            <para>For resource files use "/WP7_Barcode_Library;component/Icons/Type_UPC-A.png" where WP7_Barcode_Library is the assembly where the files are stored</para>
+            <para>See detals on bulk media: http://msdn.microsoft.com/en-us/library/ff967560(v=VS.92).aspx#BKMK_Media </para>
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeSampleItem.Bitmap">
+            <summary>
+            Returns a BitmapImage of the sample file that can be used to for binding to an Image element
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeSampleItem.Text">
+            <summary>
+            The text that should be displayed next to the sample image. If omitted then the image filename will be used instead.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeSampleItem.isEnabled">
+            <summary>
+            Used to enable or disable this barcode type.
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeSampleItem.Visible">
+            <summary>
+            Binding used to hide barcode types that are not enabled. Should be set on the grid or stack panel of the DataTemplate for ListBox or ListPicker control.
+            </summary>
+        </member>
+        <member name="T:WP7_Barcode_Library.BarcodeSampleItemManager">
+            <summary>
+            Initializes the list of sample barcodes and can be used as the datacontext for ListPicker or ListBox
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeSampleItemManager.Items">
+            <summary>
+            List of sample images that can be used as the data context for a ListPicker or ListBox
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeSampleItemManager.BarcodeChooserURI">
+            <summary>
+            Static reference to the URL that can be used to navigate to the BarcodePhotoChooser page with NavigationService.Navigate(...)
+            </summary>
+        </member>
+        <member name="P:WP7_Barcode_Library.BarcodeSampleItemManager.SelectedItem">
+            <summary>
+            Used to pass the selected item from the BarcodePhotoChooser page back to the parent page.
+            </summary>
+        </member>
+        <member name="T:WP7_Common_Code.WP7Utilities">
+            <summary>
+            Utility class for Windows Phone 7. Includes properties for detecting emulator, UI Thread, Theme,
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.WP7Utilities.UIThreadInvoke(System.Action)">
+            <summary>
+            Runs an action on the UI thread.
+            Example: WP7Utilities.UIThreadInvoke(new Action(() => {BitmapImage x = new BitmapImage();}) 
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.WP7Utilities.UIThreadInvoke(System.Delegate,System.Object[])">
+            <summary>
+            Runs an action on the UI thread.
+            Example: WP7Utilities.UIThreadInvoke(new Action(() => {BitmapImage x = new BitmapImage();}) 
+            </summary>
+        </member>
+        <member name="M:WP7_Common_Code.WP7Utilities.UIThreadDelayInvoke(System.TimeSpan,System.Action)">
+            <summary>
+            Runs an action on the UI thread after the specified amount of time using a DispatchTimer
+            Example: WP7Utilities.UIThreadInvoke(new Action(() => {BitmapImage x = new BitmapImage();}) 
+            </summary>
+            <param name="tsDelay">Delay before invoke will begin. Ex: TimeSpan.FromSeconds(2)</param>
+            <param name="a">Code to execute</param>
+        </member>
+        <member name="P:WP7_Common_Code.WP7Utilities.isEmulatorMode">
+            <summary>
+            Returns true if application is running on an Emulator instead of actual device
+            </summary>
+        </member>
+        <member name="P:WP7_Common_Code.WP7Utilities.isLightTheme">
+            <summary>
+            Returns true if the application is running under the Light theme instead of default Dark theme.
+            </summary>
+        </member>
+        <member name="P:WP7_Common_Code.WP7Utilities.IsDesignTime">
+            <summary>
+            Returns true when project is being rendered using Visual Studio or Blend designer
+            Useful to omit code that could cause the designer to crash.
+            </summary>
+        </member>
+        <member name="P:WP7_Common_Code.WP7Utilities.isUIThread">
+            <summary>
+            Returns true if called from UI thread, false otherwise
+            </summary>
+        </member>
+        <member name="P:WP7_Common_Code.WP7Utilities.IsHackedMarketplaceapp">
+            <summary>
+            Detects if app was sideloaded to unlocked device. Useful for monitoring application piracy.
+            For more details see: http://www.nextbestgeek.com/2010/12/30/getting-a-more-secure-windows-phone-7-app/
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.FileName">
+            <summary>
+            The Jpeg file name (excluding path).
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.FileSize">
+            <summary>
+            The Jpeg file size, in bytes.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.IsValid">
+            <summary>
+            True if the provided Stream was detected to be a Jpeg image, False otherwise.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.Width">
+            <summary>
+            Image dimensions, in pixels.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.Height">
+            <summary>
+            Image dimensions, in pixels.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.IsColor">
+            <summary>
+            True if the image data is expressed in 3 components (RGB), False otherwise.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.Orientation">
+            <summary>
+            Orientation of the image.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.XResolution">
+            <summary>
+            The X and Y resolutions of the image, expressed in ResolutionUnit.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.YResolution">
+            <summary>
+            The X and Y resolutions of the image, expressed in ResolutionUnit.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.ResolutionUnit">
+            <summary>
+            Resolution unit of the image.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.DateTime">
+            <summary>
+            Date at which the image was taken.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.Description">
+            <summary>
+            Description of the image.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.Make">
+            <summary>
+            Camera manufacturer.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.Model">
+            <summary>
+            Camera model.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.Software">
+            <summary>
+            Software used to create the image.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.Artist">
+            <summary>
+            Image artist.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.Copyright">
+            <summary>
+            Image copyright.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.UserComment">
+            <summary>
+            Image user comments.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.ExposureTime">
+            <summary>
+            Exposure time, in seconds.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.FNumber">
+            <summary>
+            F-number (F-stop) of the camera lens when the image was taken.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.Flash">
+            <summary>
+            Flash settings of the camera when the image was taken.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.GpsLatitudeRef">
+            <summary>
+            GPS latitude reference (North, South).
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.GpsLatitude">
+            <summary>
+            GPS latitude (degrees, minutes, seconds).
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.GpsLongitudeRef">
+            <summary>
+            GPS longitude reference (East, West).
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.GpsLongitude">
+            <summary>
+            GPS longitude (degrees, minutes, seconds).
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.ThumbnailOffset">
+            <summary>
+            Byte offset and size of the thumbnail data within the Exif section of the image file.
+            Used internally.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.ThumbnailSize">
+            <summary>
+            Byte offset and size of the thumbnail data within the Exif section of the image file.
+            Used internally.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.ThumbnailData">
+            <summary>
+            Thumbnail data found in the Exif section.
+            </summary>
+        </member>
+        <member name="F:ExifLib.JpegInfo.LoadTime">
+            <summary>
+            Time taken to load the image information.
+            </summary>
+        </member>
+        <member name="T:ExifLib.ExifTagFormat">
+            <summary>
+            As per: http://www.media.mit.edu/pia/Research/deepview/exif.html
+            </summary>
+        </member>
+        <member name="T:ExifLib.ExifIO">
+            <summary>
+            Utility to handle multi-byte primitives in both big and little endian.
+            http://msdn.microsoft.com/en-us/library/system.bitconverter.islittleendian.aspx
+            http://en.wikipedia.org/wiki/Endianness
+            </summary>
+        </member>
+        <member name="T:ExifLib.ExifFlash">
+            <summary>
+            As per http://www.exif.org/Exif2-2.PDF
+            </summary>
+        </member>
+        <member name="T:ExifLib.ExifReader">
+            <summary>
+            Based on http://www.media.mit.edu/pia/Research/deepview/exif.html
+            http://www.awaresystems.be/imaging/tiff/tifftags/privateifd/exif.html
+            </summary>
+        </member>
+    </members>
+</doc>

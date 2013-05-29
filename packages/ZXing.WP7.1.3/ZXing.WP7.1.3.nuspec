@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ZXing.WP7</id>
+    <version>1.3</version>
+    <title>Windows Phone 7 Silverlight ZXing Barcode Scanning Library</title>
+    <authors>Greg Bray</authors>
+    <owners>Greg Bray</owners>
+    <projectUrl>http://silverlightzxing.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ZXing (pronounced "zebra crossing") is an open-source, multi-format 1D/2D barcode image processing library originally implemented by Google in Java.
+
+This is a Silverlight port of the csharp ZXing port created by Suraj Supekar at revision 1202 in the SVN repository. It was designed for use in the PhraseMeme Scanner application, but can be used to create other Windows Phone or Silverlight applications that scan and process Barcodes.
+
+The library currently supports:
+
+UPC-A and UPC-E
+EAN-8 and EAN-13
+Code 39
+Code 128
+QR Code
+ITF
+Data Matrix (Not tested)
+PDF417 (Not tested)</description>
+    <summary>ZXing (pronounced "zebra crossing") is an open-source, multi-format 1D/2D barcode image processing library originally implemented by Google in Java.</summary>
+    <references>
+      <reference file="Silverlight_ZXing_Core.dll" />
+      <reference file="WP7_Barcode_Library.dll" />
+    </references>
+  </metadata>
+</package>

@@ -1,0 +1,2689 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Silverlight_ZXing_Core</name>
+    </assembly>
+    <members>
+        <member name="T:com.google.zxing.qrcode.decoder.ErrorCorrectionLevel">
+            <summary> <p>See ISO 18004:2006, 6.5.1. This enum encapsulates the four error correction levels
+            defined by the QR code standard.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="F:com.google.zxing.qrcode.decoder.ErrorCorrectionLevel.L">
+            <summary> L = ~7% correction</summary>
+        </member>
+        <member name="F:com.google.zxing.qrcode.decoder.ErrorCorrectionLevel.M">
+            <summary> M = ~15% correction</summary>
+        </member>
+        <member name="F:com.google.zxing.qrcode.decoder.ErrorCorrectionLevel.Q">
+            <summary> Q = ~25% correction</summary>
+        </member>
+        <member name="F:com.google.zxing.qrcode.decoder.ErrorCorrectionLevel.H">
+            <summary> H = ~30% correction</summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.ErrorCorrectionLevel.forBits(System.Int32)">
+            <param name="bits">int containing the two bits encoding a QR Code's error correction level
+            </param>
+            <returns> {@link ErrorCorrectionLevel} representing the encoded error correction level
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.DecodedBitStreamParser">
+            <summary> <p>QR Codes can encode text as bits in one of several modes, and can use multiple modes
+            in one QR Code. This class decodes the bits back into text.</p>
+            
+            <p>See ISO 18004:2006, 6.4.3 - 6.4.7</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="F:com.google.zxing.qrcode.decoder.DecodedBitStreamParser.ALPHANUMERIC_CHARS">
+            <summary> See ISO 18004:2006, 6.4.4 Table 5</summary>
+        </member>
+        <member name="T:com.google.zxing.oned.EAN13Writer">
+            <summary> This object renders an EAN13 code as a ByteMatrix 2D array of greyscale
+            values.
+            
+            </summary>
+            <author>  aripollak@gmail.com (Ari Pollak)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.oned.UPCEANWriter">
+            <summary> <p>Encapsulates functionality and implementation that is common to UPC and EAN families
+            of one-dimensional barcodes.</p>
+            
+            </summary>
+            <author>  aripollak@gmail.com (Ari Pollak)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.Writer">
+            <summary> The base class for all objects which encode/generate a barcode image.
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.Writer.encode(System.String,com.google.zxing.BarcodeFormat,System.Int32,System.Int32)">
+            <summary> Encode a barcode using the default settings.
+            
+            </summary>
+            <param name="contents">The contents to encode in the barcode
+            </param>
+            <param name="format">The barcode format to generate
+            </param>
+            <param name="width">The preferred width in pixels
+            </param>
+            <param name="height">The preferred height in pixels
+            </param>
+            <returns> The generated barcode as a Matrix of unsigned bytes (0 == black, 255 == white)
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.Writer.encode(System.String,com.google.zxing.BarcodeFormat,System.Int32,System.Int32,System.Collections.Generic.Dictionary{System.Object,System.Object})">
+            <summary> </summary>
+            <param name="contents">The contents to encode in the barcode
+            </param>
+            <param name="format">The barcode format to generate
+            </param>
+            <param name="width">The preferred width in pixels
+            </param>
+            <param name="height">The preferred height in pixels
+            </param>
+            <param name="hints">Additional parameters to supply to the encoder
+            </param>
+            <returns> The generated barcode as a Matrix of unsigned bytes (0 == black, 255 == white)
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.oned.UPCEANWriter.renderResult(System.SByte[],System.Int32,System.Int32)">
+            <returns> a byte array of horizontal pixels (0 = white, 1 = black) 
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.oned.UPCEANWriter.appendPattern(System.SByte[],System.Int32,System.Int32[],System.Int32)">
+            <summary> Appends the given pattern to the target array starting at pos.
+            
+            </summary>
+            <param name="startColor">starting color - 0 for white, 1 for black
+            </param>
+            <returns> the number of elements added to target.
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.oned.UPCEANWriter.encode(System.String)">
+            <returns> a byte array of horizontal pixels (0 = white, 1 = black) 
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.oned.EAN13Reader">
+            <summary> <p>Implements decoding of the EAN-13 format.</p>
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>  Sean Owen
+            </author>
+            <author>  alasdair@google.com (Alasdair Mackintosh)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.oned.UPCEANReader">
+            <summary> <p>Encapsulates functionality and implementation that is common to UPC and EAN families
+            of one-dimensional barcodes.</p>
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>  Sean Owen
+            </author>
+            <author>  alasdair@google.com (Alasdair Mackintosh)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.oned.OneDReader">
+            <summary> Encapsulates functionality and implementation that is common to all families
+            of one-dimensional barcodes.
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.Reader">
+            <summary> Implementations of this interface can decode an image of a barcode in some format into
+            the String it encodes. For example, {@link com.google.zxing.qrcode.QRCodeReader} can
+            decode a QR code. The decoder may optionally receive hints from the caller which may help
+            it decode more quickly or accurately.
+            
+            See {@link com.google.zxing.MultiFormatReader}, which attempts to determine what barcode
+            format is present within the image as well, and then decodes it accordingly.
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.Reader.decode(com.google.zxing.BinaryBitmap)">
+            <summary> Locates and decodes a barcode in some format within an image.
+            
+            </summary>
+            <param name="image">image of barcode to decode
+            </param>
+            <returns> String which the barcode encodes
+            </returns>
+            <throws>  ReaderException if the barcode cannot be located or decoded for any reason </throws>
+        </member>
+        <member name="M:com.google.zxing.Reader.decode(com.google.zxing.BinaryBitmap,System.Collections.Generic.Dictionary{System.Object,System.Object})">
+            <summary> Locates and decodes a barcode in some format within an image. This method also accepts
+            hints, each possibly associated to some data, which may help the implementation decode.
+            
+            </summary>
+            <param name="image">image of barcode to decode
+            </param>
+            <param name="hints">passed as a {@link java.util.Hashtable} from {@link com.google.zxing.DecodeHintType}
+            to arbitrary data. The
+            meaning of the data depends upon the hint type. The implementation may or may not do
+            anything with these hints.
+            </param>
+            <returns> String which the barcode encodes
+            </returns>
+            <throws>  ReaderException if the barcode cannot be located or decoded for any reason </throws>
+        </member>
+        <member name="M:com.google.zxing.oned.OneDReader.doDecode(com.google.zxing.BinaryBitmap,System.Collections.Generic.Dictionary{System.Object,System.Object})">
+            <summary> We're going to examine rows from the middle outward, searching alternately above and below the
+            middle, and farther out each time. rowStep is the number of rows between each successive
+            attempt above and below the middle. So we'd scan row middle, then middle - rowStep, then
+            middle + rowStep, then middle - (2 * rowStep), etc.
+            rowStep is bigger as the image is taller, but is always at least 1. We've somewhat arbitrarily
+            decided that moving up and down by about 1/16 of the image is pretty good; we try more of the
+            image if "trying harder".
+            
+            </summary>
+            <param name="image">The image to decode
+            </param>
+            <param name="hints">Any hints that were requested
+            </param>
+            <returns> The contents of the decoded barcode
+            </returns>
+            <throws>  ReaderException Any spontaneous errors which occur </throws>
+        </member>
+        <member name="M:com.google.zxing.oned.OneDReader.recordPattern(com.google.zxing.common.BitArray,System.Int32,System.Int32[])">
+            <summary> Records the size of successive runs of white and black pixels in a row, starting at a given point.
+            The values are recorded in the given array, and the number of runs recorded is equal to the size
+            of the array. If the row starts on a white pixel at the given start point, then the first count
+            recorded is the run of white pixels starting from that point; likewise it is the count of a run
+            of black pixels if the row begin on a black pixels at that point.
+            
+            </summary>
+            <param name="row">row to count from
+            </param>
+            <param name="start">offset into row to start at
+            </param>
+            <param name="counters">array into which to record counts
+            </param>
+            <throws>  ReaderException if counters cannot be filled entirely from row before running out </throws>
+            <summary>  of pixels
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.oned.OneDReader.patternMatchVariance(System.Int32[],System.Int32[],System.Int32)">
+            <summary> Determines how closely a set of observed counts of runs of black/white values matches a given
+            target pattern. This is reported as the ratio of the total variance from the expected pattern
+            proportions across all pattern elements, to the length of the pattern.
+            
+            </summary>
+            <param name="counters">observed counters
+            </param>
+            <param name="pattern">expected pattern
+            </param>
+            <param name="maxIndividualVariance">The most any counter can differ before we give up
+            </param>
+            <returns> ratio of total variance between counters and pattern compared to total pattern size,
+            where the ratio has been multiplied by 256. So, 0 means no variance (perfect match); 256 means
+            the total variance between counters and patterns equals the pattern length, higher values mean
+            even more variance
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.oned.OneDReader.decodeRow(System.Int32,com.google.zxing.common.BitArray,System.Collections.Generic.Dictionary{System.Object,System.Object})">
+            <summary> <p>Attempts to decode a one-dimensional barcode format given a single row of
+            an image.</p>
+            
+            </summary>
+            <param name="rowNumber">row number from top of the row
+            </param>
+            <param name="row">the black/white pixel data of the row
+            </param>
+            <param name="hints">decode hints
+            </param>
+            <returns> {@link Result} containing encoded string and start/end of barcode
+            </returns>
+            <throws>  ReaderException if an error occurs or barcode cannot be found </throws>
+        </member>
+        <member name="F:com.google.zxing.oned.UPCEANReader.START_END_PATTERN">
+            <summary> Start/end guard pattern.</summary>
+        </member>
+        <member name="F:com.google.zxing.oned.UPCEANReader.MIDDLE_PATTERN">
+            <summary> Pattern marking the middle of a UPC/EAN pattern, separating the two halves.</summary>
+        </member>
+        <member name="F:com.google.zxing.oned.UPCEANReader.L_PATTERNS">
+            <summary> "Odd", or "L" patterns used to encode UPC/EAN digits.</summary>
+        </member>
+        <member name="F:com.google.zxing.oned.UPCEANReader.L_AND_G_PATTERNS">
+            <summary> As above but also including the "even", or "G" patterns used to encode UPC/EAN digits.</summary>
+        </member>
+        <member name="M:com.google.zxing.oned.UPCEANReader.decodeRow(System.Int32,com.google.zxing.common.BitArray,System.Int32[],System.Collections.Generic.Dictionary{System.Object,System.Object})">
+            <summary> <p>Like {@link #decodeRow(int, BitArray, java.util.Hashtable)}, but
+            allows caller to inform method about where the UPC/EAN start pattern is
+            found. This allows this to be computed once and reused across many implementations.</p>
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.oned.UPCEANReader.checkChecksum(System.String)">
+            <returns> {@link #checkStandardUPCEANChecksum(String)}
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.oned.UPCEANReader.checkStandardUPCEANChecksum(System.String)">
+            <summary> Computes the UPC/EAN checksum on a string of digits, and reports
+            whether the checksum is correct or not.
+            
+            </summary>
+            <param name="s">string of digits to check
+            </param>
+            <returns> true iff string of digits passes the UPC/EAN checksum algorithm
+            </returns>
+            <throws>  ReaderException if the string does not contain only digits </throws>
+        </member>
+        <member name="M:com.google.zxing.oned.UPCEANReader.findGuardPattern(com.google.zxing.common.BitArray,System.Int32,System.Boolean,System.Int32[])">
+            <param name="row">row of black/white values to search
+            </param>
+            <param name="rowOffset">position to start search
+            </param>
+            <param name="whiteFirst">if true, indicates that the pattern specifies white/black/white/...
+            pixel counts, otherwise, it is interpreted as black/white/black/...
+            </param>
+            <param name="pattern">pattern of counts of number of black and white pixels that are being
+            searched for as a pattern
+            </param>
+            <returns> start/end horizontal offset of guard pattern, as an array of two ints
+            </returns>
+            <throws>  ReaderException if pattern is not found </throws>
+        </member>
+        <member name="M:com.google.zxing.oned.UPCEANReader.decodeDigit(com.google.zxing.common.BitArray,System.Int32[],System.Int32,System.Int32[][])">
+            <summary> Attempts to decode a single UPC/EAN-encoded digit.
+            
+            </summary>
+            <param name="row">row of black/white values to decode
+            </param>
+            <param name="counters">the counts of runs of observed black/white/black/... values
+            </param>
+            <param name="rowOffset">horizontal offset to start decoding from
+            </param>
+            <param name="patterns">the set of patterns to use to decode -- sometimes different encodings
+            for the digits 0-9 are used, and this indicates the encodings for 0 to 9 that should
+            be used
+            </param>
+            <returns> horizontal offset of first pixel beyond the decoded digit
+            </returns>
+            <throws>  ReaderException if digit cannot be decoded </throws>
+        </member>
+        <member name="M:com.google.zxing.oned.UPCEANReader.decodeMiddle(com.google.zxing.common.BitArray,System.Int32[],System.Text.StringBuilder)">
+            <summary> Subclasses override this to decode the portion of a barcode between the start
+            and end guard patterns.
+            
+            </summary>
+            <param name="row">row of black/white values to search
+            </param>
+            <param name="startRange">start/end offset of start guard pattern
+            </param>
+            <param name="resultString">{@link StringBuffer} to append decoded chars to
+            </param>
+            <returns> horizontal offset of first pixel after the "middle" that was decoded
+            </returns>
+            <throws>  ReaderException if decoding could not complete successfully </throws>
+        </member>
+        <member name="P:com.google.zxing.oned.UPCEANReader.BarcodeFormat">
+            <summary> Get the format of this decoder.
+            
+            </summary>
+            <returns> The 1D format.
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.oned.EAN13Reader.determineFirstDigit(System.Text.StringBuilder,System.Int32)">
+            <summary> Based on pattern of odd-even ('L' and 'G') patterns used to encoded the explicitly-encoded
+            digits in a barcode, determines the implicitly encoded first digit and adds it to the
+            result string.
+            
+            </summary>
+            <param name="resultString">string to insert decoded first digit into
+            </param>
+            <param name="lgPatternFound">int whose bits indicates the pattern of odd/even L/G patterns used to
+            encode digits
+            </param>
+            <throws>  ReaderException if first digit cannot be determined </throws>
+        </member>
+        <member name="T:com.google.zxing.common.reedsolomon.ReedSolomonException">
+            <summary> <p>Thrown when an exception occurs during Reed-Solomon decoding, such as when
+            there are too many errors to correct.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>	
+        </member>
+        <member name="T:com.google.zxing.BarcodeFormat">
+            <summary> Enumerates barcode formats known to this package.
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="F:com.google.zxing.BarcodeFormat.ALL_1D">
+            <summary>MultiReader for all 1D barcode types. </summary>
+        </member>
+        <member name="F:com.google.zxing.BarcodeFormat.UPC_EAN">
+            <summary>MultiReader for all UPC and EAN types. </summary>
+        </member>
+        <member name="F:com.google.zxing.BarcodeFormat.QR_CODE">
+            <summary>QR Code 2D barcode format. </summary>
+        </member>
+        <member name="F:com.google.zxing.BarcodeFormat.DATAMATRIX">
+            <summary>DataMatrix 2D barcode format. </summary>
+        </member>
+        <member name="F:com.google.zxing.BarcodeFormat.UPC_E">
+            <summary>UPC-E 1D format. </summary>
+        </member>
+        <member name="F:com.google.zxing.BarcodeFormat.UPC_A">
+            <summary>UPC-A 1D format. </summary>
+        </member>
+        <member name="F:com.google.zxing.BarcodeFormat.EAN_8">
+            <summary>EAN-8 1D format. </summary>
+        </member>
+        <member name="F:com.google.zxing.BarcodeFormat.EAN_13">
+            <summary>EAN-13 1D format. </summary>
+        </member>
+        <member name="F:com.google.zxing.BarcodeFormat.CODE_128">
+            <summary>Code 128 1D format. </summary>
+        </member>
+        <member name="F:com.google.zxing.BarcodeFormat.CODE_39">
+            <summary>Code 39 1D format. </summary>
+        </member>
+        <member name="F:com.google.zxing.BarcodeFormat.ITF">
+            <summary>ITF (Interleaved Two of Five) 1D format. </summary>
+        </member>
+        <member name="F:com.google.zxing.BarcodeFormat.PDF417">
+            <summary>PDF417 format. </summary>
+        </member>
+        <member name="T:com.google.zxing.ResultPointCallback">
+            <summary> Callback which is invoked when a possible result point (significant
+            point in the barcode image such as a corner) is found.
+            
+            </summary>
+            <seealso cref="F:com.google.zxing.DecodeHintType.NEED_RESULT_POINT_CALLBACK">
+            </seealso>
+        </member>
+        <member name="T:com.google.zxing.common.HybridBinarizer">
+            <summary> This class implements a local thresholding algorithm, which while slower than the
+            GlobalHistogramBinarizer, is fairly efficient for what it does. It is designed for
+            high frequency images of barcodes with black data on white backgrounds. For this application,
+            it does a much better job than a global blackpoint with severe shadows and gradients.
+            However it tends to produce artifacts on lower frequency images and is therefore not
+            a good general purpose binarizer for uses outside ZXing.
+            
+            This class extends GlobalHistogramBinarizer, using the older histogram approach for 1D readers,
+            and the newer local approach for 2D readers. 1D decoding using a per-row histogram is already
+            inherently local, and only fails for horizontal gradients. We can revisit that problem later,
+            but for now it was not a win to use local blocks for 1D.
+            
+            This Binarizer is the default for the unit tests and the recommended class for library users.
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.common.GlobalHistogramBinarizer">
+            <summary> This Binarizer implementation uses the old ZXing global histogram approach. It is suitable
+            for low-end mobile devices which don't have enough CPU or memory to use a local thresholding
+            algorithm. However, because it picks a global black point, it cannot handle difficult shadows
+            and gradients.
+            
+            Faster mobile devices and all desktop applications should probably use HybridBinarizer instead.
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.Binarizer">
+            <summary> This class hierarchy provides a set of methods to convert luminance data to 1 bit data.
+            It allows the algorithm to vary polymorphically, for example allowing a very expensive
+            thresholding technique for servers and a fast one for mobile. It also permits the implementation
+            to vary, e.g. a JNI version for Android and a Java fallback version for other platforms.
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:com.google.zxing.Binarizer.getBlackRow(System.Int32,com.google.zxing.common.BitArray)" -->
+        <member name="M:com.google.zxing.Binarizer.createBinarizer(com.google.zxing.LuminanceSource)">
+            <summary> Creates a new object with the same type as this Binarizer implementation, but with pristine
+            state. This is needed because Binarizer implementations may be stateful, e.g. keeping a cache
+            of 1 bit data. See Effective Java for why we can't use Java's clone() method.
+            
+            </summary>
+            <param name="source">The LuminanceSource this Binarizer will operate on.
+            </param>
+            <returns> A new concrete Binarizer implementation object.
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.Binarizer.BlackMatrix">
+            <summary> Converts a 2D array of luminance data to 1 bit data. As above, assume this method is expensive
+            and do not call it repeatedly. This method is intended for decoding 2D barcodes and may or
+            may not apply sharpening. Therefore, a row from this matrix may not be identical to one
+            fetched using getBlackRow(), so don't mix and match between them.
+            
+            </summary>
+            <returns> The 2D array of bits for the image (true means black).
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.qrcode.encoder.MatrixUtil">
+            <author>  satorux@google.com (Satoru Takabayashi) - creator
+            </author>
+            <author>  dswitkin@google.com (Daniel Switkin) - ported from C++
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.Decoder">
+            <summary> <p>The main class which implements QR Code decoding -- as opposed to locating and extracting
+            the QR Code from an image.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.Decoder.decode(System.Boolean[][])">
+            <summary> <p>Convenience method that can decode a QR Code represented as a 2D array of booleans.
+            "true" is taken to mean a black module.</p>
+            
+            </summary>
+            <param name="image">booleans representing white/black QR Code modules
+            </param>
+            <returns> text and bytes encoded within the QR Code
+            </returns>
+            <throws>  ReaderException if the QR Code cannot be decoded </throws>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.Decoder.decode(com.google.zxing.common.BitMatrix)">
+            <summary> <p>Decodes a QR Code represented as a {@link BitMatrix}. A 1 or "true" is taken to mean a black module.</p>
+            
+            </summary>
+            <param name="bits">booleans representing white/black QR Code modules
+            </param>
+            <returns> text and bytes encoded within the QR Code
+            </returns>
+            <throws>  ReaderException if the QR Code cannot be decoded </throws>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.Decoder.correctErrors(System.SByte[],System.Int32)">
+            <summary> <p>Given data and error-correction codewords received, possibly corrupted by errors, attempts to
+            correct the errors in-place using Reed-Solomon error correction.</p>
+            
+            </summary>
+            <param name="codewordBytes">data and error correction codewords
+            </param>
+            <param name="numDataCodewords">number of codewords that are data bytes
+            </param>
+            <throws>  ReaderException if error correction fails </throws>
+        </member>
+        <member name="T:com.google.zxing.oned.UPCEReader">
+            <summary> <p>Implements decoding of the UPC-E format.</p>
+            <p/>
+            <p><a href="http://www.barcodeisland.com/upce.phtml">This</a> is a great reference for
+            UPC-E information.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="F:com.google.zxing.oned.UPCEReader.MIDDLE_END_PATTERN">
+            <summary> The pattern that marks the middle, and end, of a UPC-E pattern.
+            There is no "second half" to a UPC-E barcode.
+            </summary>
+        </member>
+        <member name="F:com.google.zxing.oned.UPCEReader.NUMSYS_AND_CHECK_DIGIT_PATTERNS">
+            <summary> See {@link #L_AND_G_PATTERNS}; these values similarly represent patterns of
+            even-odd parity encodings of digits that imply both the number system (0 or 1)
+            used, and the check digit.
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.oned.UPCEReader.convertUPCEtoUPCA(System.String)">
+            <summary> Expands a UPC-E value back into its full, equivalent UPC-A code value.
+            
+            </summary>
+            <param name="upce">UPC-E code as string of digits
+            </param>
+            <returns> equivalent UPC-A code as string of digits
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.datamatrix.detector.Detector">
+            <summary> <p>Encapsulates logic that can detect a Data Matrix Code in an image, even if the Data Matrix Code
+            is rotated or skewed, or partially obscured.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.detector.Detector.detect">
+            <summary> <p>Detects a Data Matrix Code in an image.</p>
+            
+            </summary>
+            <returns> {@link DetectorResult} encapsulating results of detecting a QR Code
+            </returns>
+            <throws>  ReaderException if no Data Matrix Code can be found </throws>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.detector.Detector.increment(System.Collections.Generic.Dictionary{System.Object,System.Object},com.google.zxing.ResultPoint)">
+            <summary> Increments the Integer associated with a key by one.</summary>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.detector.Detector.transitionsBetween(com.google.zxing.ResultPoint,com.google.zxing.ResultPoint)">
+            <summary> Counts the number of black/white transitions between two points, using something like Bresenham's algorithm.</summary>
+        </member>
+        <member name="T:com.google.zxing.datamatrix.detector.Detector.ResultPointsAndTransitions">
+            <summary> Simply encapsulates two points and a number of transitions between them.</summary>
+        </member>
+        <member name="T:com.google.zxing.datamatrix.detector.Detector.ResultPointsAndTransitionsComparator">
+            <summary> Orders ResultPointsAndTransitions by number of transitions, ascending.</summary>
+        </member>
+        <member name="T:com.google.zxing.common.Comparator">
+            <summary> This is merely a clone of <code>Comparator</code> since it is not available in
+            CLDC 1.1 / MIDP 2.0.
+            </summary>
+        </member>
+        <member name="T:com.google.zxing.datamatrix.decoder.Version">
+            <summary> The Version object encapsulates attributes about a particular
+            size Data Matrix Code.
+            
+            </summary>
+            <author>  bbrown@google.com (Brian Brown)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.Version.getVersionForDimensions(System.Int32,System.Int32)">
+            <summary> <p>Deduces version information from Data Matrix dimensions.</p>
+            
+            </summary>
+            <param name="numRows">Number of rows in modules
+            </param>
+            <param name="numColumns">Number of columns in modules
+            </param>
+            <returns> {@link Version} for a Data Matrix Code of those dimensions
+            </returns>
+            <throws>  ReaderException if dimensions do correspond to a valid Data Matrix size </throws>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.Version.buildVersions">
+            <summary> See ISO 16022:2006 5.5.1 Table 7</summary>
+        </member>
+        <member name="T:com.google.zxing.datamatrix.decoder.Version.ECBlocks">
+            <summary> <p>Encapsulates a set of error-correction blocks in one symbol version. Most versions will
+            use blocks of differing sizes within one version, so, this encapsulates the parameters for
+            each set of blocks. It also holds the number of error-correction codewords per block since it
+            will be the same across all blocks within one version.</p>
+            </summary>
+        </member>
+        <member name="T:com.google.zxing.datamatrix.decoder.Version.ECB">
+            <summary> <p>Encapsualtes the parameters for one error-correction block in one symbol version.
+            This includes the number of data codewords, and the number of times a block with these
+            parameters is used consecutively in the Data Matrix code version's format.</p>
+            </summary>
+        </member>
+        <member name="T:com.google.zxing.common.reedsolomon.ReedSolomonDecoder">
+            <summary> <p>Implements Reed-Solomon decoding, as the name implies.</p>
+            
+            <p>The algorithm will not be explained here, but the following references were helpful
+            in creating this implementation:</p>
+            
+            <ul>
+            <li>Bruce Maggs.
+            <a href="http://www.cs.cmu.edu/afs/cs.cmu.edu/project/pscico-guyb/realworld/www/rs_decode.ps">
+            "Decoding Reed-Solomon Codes"</a> (see discussion of Forney's Formula)</li>
+            <li>J.I. Hall. <a href="www.mth.msu.edu/~jhall/classes/codenotes/GRS.pdf">
+            "Chapter 5. Generalized Reed-Solomon Codes"</a>
+            (see discussion of Euclidean algorithm)</li>
+            </ul>
+            
+            <p>Much credit is due to William Rucklidge since portions of this code are an indirect
+            port of his C++ Reed-Solomon implementation.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>  William Rucklidge
+            </author>
+            <author>  sanfordsquires
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.common.reedsolomon.ReedSolomonDecoder.decode(System.Int32[],System.Int32)">
+            <summary> <p>Decodes given set of received codewords, which include both data and error-correction
+            codewords. Really, this means it uses Reed-Solomon to detect and correct errors, in-place,
+            in the input.</p>
+            
+            </summary>
+            <param name="received">data and error-correction codewords
+            </param>
+            <param name="twoS">number of error-correction codewords available
+            </param>
+            <throws>  ReedSolomonException if decoding fails for any reason </throws>
+        </member>
+        <member name="T:com.google.zxing.common.reedsolomon.GF256">
+            <summary> <p>This class contains utility methods for performing mathematical operations over
+            the Galois Field GF(256). Operations use a given primitive polynomial in calculations.</p>
+            
+            <p>Throughout this package, elements of GF(256) are represented as an <code>int</code>
+            for convenience and speed (but at the cost of memory).
+            Only the bottom 8 bits are really used.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.common.reedsolomon.GF256.#ctor(System.Int32)">
+            <summary> Create a representation of GF(256) using the given primitive polynomial.
+            
+            </summary>
+            <param name="primitive">irreducible polynomial whose coefficients are represented by
+            the bits of an int, where the least-significant bit represents the constant
+            coefficient
+            </param>
+        </member>
+        <member name="M:com.google.zxing.common.reedsolomon.GF256.buildMonomial(System.Int32,System.Int32)">
+            <returns> the monomial representing coefficient * x^degree
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.common.reedsolomon.GF256.addOrSubtract(System.Int32,System.Int32)">
+            <summary> Implements both addition and subtraction -- they are the same in GF(256).
+            
+            </summary>
+            <returns> sum/difference of a and b
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.common.reedsolomon.GF256.exp(System.Int32)">
+            <returns> 2 to the power of a in GF(256)
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.common.reedsolomon.GF256.log(System.Int32)">
+            <returns> base 2 log of a in GF(256)
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.common.reedsolomon.GF256.inverse(System.Int32)">
+            <returns> multiplicative inverse of a
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.common.reedsolomon.GF256.multiply(System.Int32,System.Int32)">
+            <param name="a">
+            </param>
+            <param name="b">
+            </param>
+            <returns> product of a and b in GF(256)
+            </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:com.google.zxing.common.ByteMatrix" -->
+        <member name="T:com.google.zxing.common.BitMatrix">
+            <summary> <p>Represents a 2D matrix of bits. In function arguments below, and throughout the common
+            module, x is the column position, and y is the row position. The ordering is always x, y.
+            The origin is at the top-left.</p>
+            
+            <p>Internally the bits are represented in a 1-D array of 32-bit ints. However, each row begins
+            with a new int. This is done intentionally so that we can copy out a row into a BitArray very
+            efficiently.</p>
+            
+            <p>The ordering of bits is row-major. Within each int, the least significant bits are used first,
+            meaning they represent lower x values. This is compatible with BitArray's implementation.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.common.BitMatrix.get_Renamed(System.Int32,System.Int32)">
+            <summary> <p>Gets the requested bit, where true means black.</p>
+            
+            </summary>
+            <param name="x">The horizontal component (i.e. which column)
+            </param>
+            <param name="y">The vertical component (i.e. which row)
+            </param>
+            <returns> value of given bit in matrix
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.common.BitMatrix.set_Renamed(System.Int32,System.Int32)">
+            <summary> <p>Sets the given bit to true.</p>
+            
+            </summary>
+            <param name="x">The horizontal component (i.e. which column)
+            </param>
+            <param name="y">The vertical component (i.e. which row)
+            </param>
+        </member>
+        <member name="M:com.google.zxing.common.BitMatrix.flip(System.Int32,System.Int32)">
+            <summary> <p>Flips the given bit.</p>
+            
+            </summary>
+            <param name="x">The horizontal component (i.e. which column)
+            </param>
+            <param name="y">The vertical component (i.e. which row)
+            </param>
+        </member>
+        <member name="M:com.google.zxing.common.BitMatrix.clear">
+            <summary> Clears all bits (sets to false).</summary>
+        </member>
+        <member name="M:com.google.zxing.common.BitMatrix.setRegion(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary> <p>Sets a square region of the bit matrix to true.</p>
+            
+            </summary>
+            <param name="left">The horizontal position to begin at (inclusive)
+            </param>
+            <param name="top">The vertical position to begin at (inclusive)
+            </param>
+            <param name="width">The width of the region
+            </param>
+            <param name="height">The height of the region
+            </param>
+        </member>
+        <member name="M:com.google.zxing.common.BitMatrix.getRow(System.Int32,com.google.zxing.common.BitArray)">
+            <summary> A fast method to retrieve one row of data from the matrix as a BitArray.
+            
+            </summary>
+            <param name="y">The row to retrieve
+            </param>
+            <param name="row">An optional caller-allocated BitArray, will be allocated if null or too small
+            </param>
+            <returns> The resulting BitArray - this reference should always be used even when passing
+            your own row
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.common.BitMatrix.Width">
+            <returns> The width of the matrix
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.common.BitMatrix.Height">
+            <returns> The height of the matrix
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.common.BitMatrix.Dimension">
+            <summary> This method is for compatibility with older code. It's only logical to call if the matrix
+            is square, so I'm throwing if that's not the case.
+            
+            </summary>
+            <returns> row/column dimension of this matrix
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.BitMatrixParser">
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.BitMatrixParser.#ctor(com.google.zxing.common.BitMatrix)">
+            <param name="bitMatrix">{@link BitMatrix} to parse
+            </param>
+            <throws>  ReaderException if dimension is not >= 21 and 1 mod 4 </throws>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.BitMatrixParser.readFormatInformation">
+            <summary> <p>Reads format information from one of its two locations within the QR Code.</p>
+            
+            </summary>
+            <returns> {@link FormatInformation} encapsulating the QR Code's format info
+            </returns>
+            <throws>  ReaderException if both format information locations cannot be parsed as </throws>
+            <summary> the valid encoding of format information
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.BitMatrixParser.readVersion">
+            <summary> <p>Reads version information from one of its two locations within the QR Code.</p>
+            
+            </summary>
+            <returns> {@link Version} encapsulating the QR Code's version
+            </returns>
+            <throws>  ReaderException if both version information locations cannot be parsed as </throws>
+            <summary> the valid encoding of version information
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.BitMatrixParser.readCodewords">
+            <summary> <p>Reads the bits in the {@link BitMatrix} representing the finder pattern in the
+            correct order in order to reconstitute the codewords bytes contained within the
+            QR Code.</p>
+            
+            </summary>
+            <returns> bytes encoded within the QR Code
+            </returns>
+            <throws>  ReaderException if the exact number of bytes expected is not read </throws>
+        </member>
+        <member name="T:com.google.zxing.LuminanceSource">
+            <summary> The purpose of this class hierarchy is to abstract different bitmap implementations across
+            platforms into a standard interface for requesting greyscale luminance values. The interface
+            only provides immutable methods; therefore crop and rotation create copies. This is to ensure
+            that one Reader does not modify the original luminance source and leave it in an unknown state
+            for other Readers in the chain.
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:com.google.zxing.LuminanceSource.getRow(System.Int32,System.SByte[])" -->
+        <!-- Badly formed XML comment ignored for member "M:com.google.zxing.LuminanceSource.crop(System.Int32,System.Int32,System.Int32,System.Int32)" -->
+        <member name="M:com.google.zxing.LuminanceSource.rotateCounterClockwise">
+            <summary> Returns a new object with rotated image data. Only callable if isRotateSupported() is true.
+            
+            </summary>
+            <returns> A rotated version of this object.
+            </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:com.google.zxing.LuminanceSource.Matrix" -->
+        <member name="P:com.google.zxing.LuminanceSource.Width">
+            <returns> The width of the bitmap.
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.LuminanceSource.Height">
+            <returns> The height of the bitmap.
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.LuminanceSource.CropSupported">
+            <returns> Whether this subclass supports cropping.
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.LuminanceSource.RotateSupported">
+            <returns> Whether this subclass supports counter-clockwise rotation.
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.common.DecoderResult">
+            <summary> <p>Encapsulates the result of decoding a matrix of bits. This typically
+            applies to 2D barcode formats. For now it contains the raw bytes obtained,
+            as well as a String interpretation of those bytes, if applicable.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.common.CharacterSetECI">
+            <summary> Encapsulates a Character Set ECI, according to "Extended Channel Interpretations" 5.3.1.1
+            of ISO 18004.
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.common.ECI">
+            <summary> Superclass of classes encapsulating types ECIs, according to "Extended Channel Interpretations"
+            5.3 of ISO 18004.
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.common.ECI.getECIByValue(System.Int32)">
+            <param name="value">ECI value
+            </param>
+            <returns> {@link ECI} representing ECI of given value, or null if it is legal but unsupported
+            </returns>
+            <throws>  IllegalArgumentException if ECI value is invalid </throws>
+        </member>
+        <member name="M:com.google.zxing.common.CharacterSetECI.getCharacterSetECIByValue(System.Int32)">
+            <param name="value">character set ECI value
+            </param>
+            <returns> {@link CharacterSetECI} representing ECI of given value, or null if it is legal but
+            unsupported
+            </returns>
+            <throws>  IllegalArgumentException if ECI value is invalid </throws>
+        </member>
+        <member name="M:com.google.zxing.common.CharacterSetECI.getCharacterSetECIByName(System.String)">
+            <param name="name">character set ECI encoding name
+            </param>
+            <returns> {@link CharacterSetECI} representing ECI for character encoding, or null if it is legal
+            but unsupported
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.qrcode.encoder.BitVector">
+            <summary> JAVAPORT: This should be combined with BitArray in the future, although that class is not yet
+            dynamically resizeable. This implementation is reasonable but there is a lot of function calling
+            in loops I'd like to get rid of.
+            
+            </summary>
+            <author>  satorux@google.com (Satoru Takabayashi) - creator
+            </author>
+            <author>  dswitkin@google.com (Daniel Switkin) - ported from C++
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.oned.ITFReader">
+            <summary> <p>Implements decoding of the ITF format.</p>
+            
+            <p>"ITF" stands for Interleaved Two of Five. This Reader will scan ITF barcode with 6, 10 or 14
+            digits. The checksum is optional and is not applied by this Reader. The consumer of the decoded
+            value will have to apply a checksum if required.</p>
+            
+            <p><a href="http://en.wikipedia.org/wiki/Interleaved_2_of_5">http://en.wikipedia.org/wiki/Interleaved_2_of_5</a>
+            is a great reference for Interleaved 2 of 5 information.</p>
+            
+            </summary>
+            <author>  kevin.osullivan@sita.aero, SITA Lab.
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="F:com.google.zxing.oned.ITFReader.START_PATTERN">
+            <summary> Start/end guard pattern.
+            
+            Note: The end pattern is reversed because the row is reversed before
+            searching for the END_PATTERN
+            </summary>
+        </member>
+        <member name="F:com.google.zxing.oned.ITFReader.PATTERNS">
+            <summary> Patterns of Wide / Narrow lines to indicate each digit</summary>
+        </member>
+        <member name="M:com.google.zxing.oned.ITFReader.decodeMiddle(com.google.zxing.common.BitArray,System.Int32,System.Int32,System.Text.StringBuilder)">
+            <param name="row">         row of black/white values to search
+            </param>
+            <param name="payloadStart">offset of start pattern
+            </param>
+            <param name="resultString">{@link StringBuffer} to append decoded chars to
+            </param>
+            <throws>  ReaderException if decoding could not complete successfully </throws>
+        </member>
+        <member name="M:com.google.zxing.oned.ITFReader.decodeStart(com.google.zxing.common.BitArray)">
+            <summary> Identify where the start of the middle / payload section starts.
+            
+            </summary>
+            <param name="row">row of black/white values to search
+            </param>
+            <returns> Array, containing index of start of 'start block' and end of
+            'start block'
+            </returns>
+            <throws>  ReaderException </throws>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:com.google.zxing.oned.ITFReader.validateQuietZone(com.google.zxing.common.BitArray,System.Int32)" -->
+        <member name="M:com.google.zxing.oned.ITFReader.skipWhiteSpace(com.google.zxing.common.BitArray)">
+            <summary> Skip all whitespace until we get to the first black line.
+            
+            </summary>
+            <param name="row">row of black/white values to search
+            </param>
+            <returns> index of the first black line.
+            </returns>
+            <throws>  ReaderException Throws exception if no black lines are found in the row </throws>
+        </member>
+        <member name="M:com.google.zxing.oned.ITFReader.decodeEnd(com.google.zxing.common.BitArray)">
+            <summary> Identify where the end of the middle / payload section ends.
+            
+            </summary>
+            <param name="row">row of black/white values to search
+            </param>
+            <returns> Array, containing index of start of 'end block' and end of 'end
+            block'
+            </returns>
+            <throws>  ReaderException </throws>
+        </member>
+        <member name="M:com.google.zxing.oned.ITFReader.findGuardPattern(com.google.zxing.common.BitArray,System.Int32,System.Int32[])">
+            <param name="row">      row of black/white values to search
+            </param>
+            <param name="rowOffset">position to start search
+            </param>
+            <param name="pattern">  pattern of counts of number of black and white pixels that are
+            being searched for as a pattern
+            </param>
+            <returns> start/end horizontal offset of guard pattern, as an array of two
+            ints
+            </returns>
+            <throws>  ReaderException if pattern is not found </throws>
+        </member>
+        <member name="M:com.google.zxing.oned.ITFReader.decodeDigit(System.Int32[])">
+            <summary> Attempts to decode a sequence of ITF black/white lines into single
+            digit.
+            
+            </summary>
+            <param name="counters">the counts of runs of observed black/white/black/... values
+            </param>
+            <returns> The decoded digit
+            </returns>
+            <throws>  ReaderException if digit cannot be decoded </throws>
+        </member>
+        <member name="T:com.google.zxing.datamatrix.decoder.DataBlock">
+            <summary> <p>Encapsulates a block of data within a Data Matrix Code. Data Matrix Codes may split their data into
+            multiple blocks, each of which is a unit of data and error-correction codewords. Each
+            is represented by an instance of this class.</p>
+            
+            </summary>
+            <author>  bbrown@google.com (Brian Brown)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.DataBlock.getDataBlocks(System.SByte[],com.google.zxing.datamatrix.decoder.Version)">
+            <summary> <p>When Data Matrix Codes use multiple data blocks, they actually interleave the bytes of each of them.
+            That is, the first byte of data block 1 to n is written, then the second bytes, and so on. This
+            method will separate the data into original blocks.</p>
+            
+            </summary>
+            <param name="rawCodewords">bytes as read directly from the Data Matrix Code
+            </param>
+            <param name="version">version of the Data Matrix Code
+            </param>
+            <returns> {@link DataBlock}s containing original bytes, "de-interleaved" from representation in the
+            Data Matrix Code
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.BinaryBitmap">
+            <summary> This class is the core bitmap class used by ZXing to represent 1 bit data. Reader objects
+            accept a BinaryBitmap and attempt to decode it.
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:com.google.zxing.BinaryBitmap.getBlackRow(System.Int32,com.google.zxing.common.BitArray)" -->
+        <!-- Badly formed XML comment ignored for member "M:com.google.zxing.BinaryBitmap.crop(System.Int32,System.Int32,System.Int32,System.Int32)" -->
+        <member name="M:com.google.zxing.BinaryBitmap.rotateCounterClockwise">
+            <summary> Returns a new object with rotated image data. Only callable if isRotateSupported() is true.
+            
+            </summary>
+            <returns> A rotated version of this object.
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.BinaryBitmap.Width">
+            <returns> The width of the bitmap.
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.BinaryBitmap.Height">
+            <returns> The height of the bitmap.
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.BinaryBitmap.BlackMatrix">
+            <summary> Converts a 2D array of luminance data to 1 bit. As above, assume this method is expensive
+            and do not call it repeatedly. This method is intended for decoding 2D barcodes and may or
+            may not apply sharpening. Therefore, a row from this matrix may not be identical to one
+            fetched using getBlackRow(), so don't mix and match between them.
+            
+            </summary>
+            <returns> The 2D array of bits for the image (true means black).
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.BinaryBitmap.CropSupported">
+            <returns> Whether this bitmap can be cropped.
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.BinaryBitmap.RotateSupported">
+            <returns> Whether this bitmap supports counter-clockwise rotation.
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.qrcode.detector.AlignmentPattern">
+            <summary> <p>Encapsulates an alignment pattern, which are the smaller square patterns found in
+            all but the simplest QR Codes.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.ResultPoint">
+            <summary> <p>Encapsulates a point of interest in an image containing a barcode. Typically, this
+            would be the location of a finder pattern or the corner of the barcode, for example.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:com.google.zxing.ResultPoint.orderBestPatterns(com.google.zxing.ResultPoint[])" -->
+        <member name="M:com.google.zxing.ResultPoint.distance(com.google.zxing.ResultPoint,com.google.zxing.ResultPoint)">
+            <returns> distance between two points
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.ResultPoint.crossProductZ(com.google.zxing.ResultPoint,com.google.zxing.ResultPoint,com.google.zxing.ResultPoint)">
+            <summary> Returns the z component of the cross product between vectors BC and BA.</summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.AlignmentPattern.aboutEquals(System.Single,System.Single,System.Single)">
+            <summary> <p>Determines if this alignment pattern "about equals" an alignment pattern at the stated
+            position and size -- meaning, it is at nearly the same center with nearly the same size.</p>
+            </summary>
+        </member>
+        <member name="T:com.google.zxing.common.reedsolomon.GF256Poly">
+            <summary> <p>Represents a polynomial whose coefficients are elements of GF(256).
+            Instances of this class are immutable.</p>
+            
+            <p>Much credit is due to William Rucklidge since portions of this code are an indirect
+            port of his C++ Reed-Solomon implementation.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.common.reedsolomon.GF256Poly.#ctor(com.google.zxing.common.reedsolomon.GF256,System.Int32[])">
+            <param name="field">the {@link GF256} instance representing the field to use
+            to perform computations
+            </param>
+            <param name="coefficients">coefficients as ints representing elements of GF(256), arranged
+            from most significant (highest-power term) coefficient to least significant
+            </param>
+            <throws>  IllegalArgumentException if argument is null or empty, </throws>
+            <summary> or if leading coefficient is 0 and this is not a
+            constant polynomial (that is, it is not the monomial "0")
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.common.reedsolomon.GF256Poly.getCoefficient(System.Int32)">
+            <returns> coefficient of x^degree term in this polynomial
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.common.reedsolomon.GF256Poly.evaluateAt(System.Int32)">
+            <returns> evaluation of this polynomial at a given point
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.common.reedsolomon.GF256Poly.Degree">
+            <returns> degree of this polynomial
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.common.reedsolomon.GF256Poly.Zero">
+            <returns> true iff this polynomial is the monomial "0"
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.ReaderException">
+            <summary> The general exception class throw when something goes wrong during decoding of a barcode.
+            This includes, but is not limited to, failing checksums / error correction algorithms, being
+            unable to locate finder timing patterns, and so on.
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.qrcode.encoder.MaskUtil">
+            <author>  satorux@google.com (Satoru Takabayashi) - creator
+            </author>
+            <author>  dswitkin@google.com (Daniel Switkin) - ported from C++
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.FormatInformation">
+            <summary> <p>Encapsulates a QR Code's format information, including the data mask used and
+            error correction level.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+            <seealso cref="P:com.google.zxing.qrcode.decoder.FormatInformation.DataMask">
+            </seealso>
+            <seealso cref="P:com.google.zxing.qrcode.decoder.FormatInformation.ErrorCorrectionLevel">
+            </seealso>
+        </member>
+        <member name="F:com.google.zxing.qrcode.decoder.FormatInformation.FORMAT_INFO_DECODE_LOOKUP">
+            <summary> See ISO 18004:2006, Annex C, Table C.1</summary>
+        </member>
+        <member name="F:com.google.zxing.qrcode.decoder.FormatInformation.BITS_SET_IN_HALF_BYTE">
+            <summary> Offset i holds the number of 1 bits in the binary representation of i</summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.FormatInformation.decodeFormatInformation(System.Int32)">
+            <param name="maskedFormatInfo">format info indicator, with mask still applied
+            </param>
+            <returns> information about the format it specifies, or <code>null</code>
+            if doesn't seem to match any known pattern
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.DataMask">
+            <summary> <p>Encapsulates data masks for the data bits in a QR code, per ISO 18004:2006 6.8. Implementations
+            of this class can un-mask a raw BitMatrix. For simplicity, they will unmask the entire BitMatrix,
+            including areas used for finder patterns, timing patterns, etc. These areas should be unused
+            after the point they are unmasked anyway.</p>
+            
+            <p>Note that the diagram in section 6.8.1 is misleading since it indicates that i is column position
+            and j is row position. In fact, as the text says, i is row position and j is column position.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="F:com.google.zxing.qrcode.decoder.DataMask.DATA_MASKS">
+            <summary> See ISO 18004:2006 6.8.1</summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.DataMask.unmaskBitMatrix(com.google.zxing.common.BitMatrix,System.Int32)">
+            <summary> <p>Implementations of this method reverse the data masking process applied to a QR Code and
+            make its bits ready to read.</p>
+            
+            </summary>
+            <param name="bits">representation of QR Code bits
+            </param>
+            <param name="dimension">dimension of QR Code, represented by bits, being unmasked
+            </param>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.DataMask.forReference(System.Int32)">
+            <param name="reference">a value between 0 and 7 indicating one of the eight possible
+            data mask patterns a QR Code may use
+            </param>
+            <returns> {@link DataMask} encapsulating the data mask pattern
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.DataMask.DataMask000">
+            <summary> 000: mask bits for which (x + y) mod 2 == 0</summary>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.DataMask.DataMask001">
+            <summary> 001: mask bits for which x mod 2 == 0</summary>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.DataMask.DataMask010">
+            <summary> 010: mask bits for which y mod 3 == 0</summary>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.DataMask.DataMask011">
+            <summary> 011: mask bits for which (x + y) mod 3 == 0</summary>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.DataMask.DataMask100">
+            <summary> 100: mask bits for which (x/2 + y/3) mod 2 == 0</summary>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.DataMask.DataMask101">
+            <summary> 101: mask bits for which xy mod 2 + xy mod 3 == 0</summary>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.DataMask.DataMask110">
+            <summary> 110: mask bits for which (xy mod 2 + xy mod 3) mod 2 == 0</summary>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.DataMask.DataMask111">
+            <summary> 111: mask bits for which ((x+y)mod 2 + xy mod 3) mod 2 == 0</summary>
+        </member>
+        <member name="T:com.google.zxing.oned.Code39Reader">
+            <summary> <p>Decodes Code 39 barcodes. This does not support "Full ASCII Code 39" yet.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="F:com.google.zxing.oned.Code39Reader.CHARACTER_ENCODINGS">
+            <summary> These represent the encodings of characters, as patterns of wide and narrow bars.
+            The 9 least-significant bits of each int correspond to the pattern of wide and narrow,
+            with 1s representing "wide" and 0s representing narrow.
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.oned.Code39Reader.#ctor">
+            <summary> Creates a reader that assumes all encoded data is data, and does not treat the final
+            character as a check digit. It will not decoded "extended Code 39" sequences.
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.oned.Code39Reader.#ctor(System.Boolean)">
+            <summary> Creates a reader that can be configured to check the last character as a check digit.
+            It will not decoded "extended Code 39" sequences.
+            
+            </summary>
+            <param name="usingCheckDigit">if true, treat the last data character as a check digit, not
+            data, and verify that the checksum passes.
+            </param>
+        </member>
+        <member name="M:com.google.zxing.oned.Code39Reader.#ctor(System.Boolean,System.Boolean)">
+            <summary> Creates a reader that can be configured to check the last character as a check digit,
+            or optionally attempt to decode "extended Code 39" sequences that are used to encode
+            the full ASCII character set.
+            
+            </summary>
+            <param name="usingCheckDigit">if true, treat the last data character as a check digit, not
+            data, and verify that the checksum passes.
+            </param>
+            <param name="extendedMode">if true, will attempt to decode extended Code 39 sequences in the
+            text.
+            </param>
+        </member>
+        <member name="T:com.google.zxing.datamatrix.decoder.DecodedBitStreamParser">
+            <summary> <p>Data Matrix Codes can encode text as bits in one of several modes, and can use multiple modes
+            in one Data Matrix Code. This class decodes the bits back into text.</p>
+            
+            <p>See ISO 16022:2006, 5.2.1 - 5.2.9.2</p>
+            
+            </summary>
+            <author>  bbrown@google.com (Brian Brown)
+            </author>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="F:com.google.zxing.datamatrix.decoder.DecodedBitStreamParser.C40_BASIC_SET_CHARS">
+            <summary> See ISO 16022:2006, Annex C Table C.1
+            The C40 Basic Character Set (*'s used for placeholders for the shift values)
+            </summary>
+        </member>
+        <member name="F:com.google.zxing.datamatrix.decoder.DecodedBitStreamParser.TEXT_BASIC_SET_CHARS">
+            <summary> See ISO 16022:2006, Annex C Table C.2
+            The Text Basic Character Set (*'s used for placeholders for the shift values)
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.DecodedBitStreamParser.decodeAsciiSegment(com.google.zxing.common.BitSource,System.Text.StringBuilder,System.Text.StringBuilder)">
+            <summary> See ISO 16022:2006, 5.2.3 and Annex C, Table C.2</summary>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.DecodedBitStreamParser.decodeC40Segment(com.google.zxing.common.BitSource,System.Text.StringBuilder)">
+            <summary> See ISO 16022:2006, 5.2.5 and Annex C, Table C.1</summary>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.DecodedBitStreamParser.decodeTextSegment(com.google.zxing.common.BitSource,System.Text.StringBuilder)">
+            <summary> See ISO 16022:2006, 5.2.6 and Annex C, Table C.2</summary>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.DecodedBitStreamParser.decodeAnsiX12Segment(com.google.zxing.common.BitSource,System.Text.StringBuilder)">
+            <summary> See ISO 16022:2006, 5.2.7</summary>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.DecodedBitStreamParser.decodeEdifactSegment(com.google.zxing.common.BitSource,System.Text.StringBuilder)">
+            <summary> See ISO 16022:2006, 5.2.8 and Annex C Table C.3</summary>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.DecodedBitStreamParser.decodeBase256Segment(com.google.zxing.common.BitSource,System.Text.StringBuilder,System.Collections.Generic.List{System.Object})">
+            <summary> See ISO 16022:2006, 5.2.9 and Annex B, B.2</summary>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.DecodedBitStreamParser.unrandomize255State(System.Int32,System.Int32)">
+            <summary> See ISO 16022:2006, Annex B, B.2</summary>
+        </member>
+        <member name="T:com.google.zxing.datamatrix.decoder.BitMatrixParser">
+            <author>  bbrown@google.com (Brian Brown)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:com.google.zxing.datamatrix.decoder.BitMatrixParser.#ctor(com.google.zxing.common.BitMatrix)" -->
+        <member name="M:com.google.zxing.datamatrix.decoder.BitMatrixParser.readVersion(com.google.zxing.common.BitMatrix)">
+            <summary> <p>Creates the version object based on the dimension of the original bit matrix from 
+            the datamatrix code.</p>
+            
+            <p>See ISO 16022:2006 Table 7 - ECC 200 symbol attributes</p>
+            
+            </summary>
+            <param name="bitMatrix">Original {@link BitMatrix} including alignment patterns
+            </param>
+            <returns> {@link Version} encapsulating the Data Matrix Code's "version"
+            </returns>
+            <throws>  ReaderException if the dimensions of the mapping matrix are not valid </throws>
+            <summary> Data Matrix dimensions.
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.BitMatrixParser.readCodewords">
+            <summary> <p>Reads the bits in the {@link BitMatrix} representing the mapping matrix (No alignment patterns)
+            in the correct order in order to reconstitute the codewords bytes contained within the
+            Data Matrix Code.</p>
+            
+            </summary>
+            <returns> bytes encoded within the Data Matrix Code
+            </returns>
+            <throws>  ReaderException if the exact number of bytes expected is not read </throws>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.BitMatrixParser.readModule(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary> <p>Reads a bit of the mapping matrix accounting for boundary wrapping.</p>
+            
+            </summary>
+            <param name="row">Row to read in the mapping matrix
+            </param>
+            <param name="column">Column to read in the mapping matrix
+            </param>
+            <param name="numRows">Number of rows in the mapping matrix
+            </param>
+            <param name="numColumns">Number of columns in the mapping matrix
+            </param>
+            <returns> value of the given bit in the mapping matrix
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.BitMatrixParser.readUtah(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary> <p>Reads the 8 bits of the standard Utah-shaped pattern.</p>
+            
+            <p>See ISO 16022:2006, 5.8.1 Figure 6</p>
+            
+            </summary>
+            <param name="row">Current row in the mapping matrix, anchored at the 8th bit (LSB) of the pattern
+            </param>
+            <param name="column">Current column in the mapping matrix, anchored at the 8th bit (LSB) of the pattern
+            </param>
+            <param name="numRows">Number of rows in the mapping matrix
+            </param>
+            <param name="numColumns">Number of columns in the mapping matrix
+            </param>
+            <returns> byte from the utah shape
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.BitMatrixParser.readCorner1(System.Int32,System.Int32)">
+            <summary> <p>Reads the 8 bits of the special corner condition 1.</p>
+            
+            <p>See ISO 16022:2006, Figure F.3</p>
+            
+            </summary>
+            <param name="numRows">Number of rows in the mapping matrix
+            </param>
+            <param name="numColumns">Number of columns in the mapping matrix
+            </param>
+            <returns> byte from the Corner condition 1
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.BitMatrixParser.readCorner2(System.Int32,System.Int32)">
+            <summary> <p>Reads the 8 bits of the special corner condition 2.</p>
+            
+            <p>See ISO 16022:2006, Figure F.4</p>
+            
+            </summary>
+            <param name="numRows">Number of rows in the mapping matrix
+            </param>
+            <param name="numColumns">Number of columns in the mapping matrix
+            </param>
+            <returns> byte from the Corner condition 2
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.BitMatrixParser.readCorner3(System.Int32,System.Int32)">
+            <summary> <p>Reads the 8 bits of the special corner condition 3.</p>
+            
+            <p>See ISO 16022:2006, Figure F.5</p>
+            
+            </summary>
+            <param name="numRows">Number of rows in the mapping matrix
+            </param>
+            <param name="numColumns">Number of columns in the mapping matrix
+            </param>
+            <returns> byte from the Corner condition 3
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.BitMatrixParser.readCorner4(System.Int32,System.Int32)">
+            <summary> <p>Reads the 8 bits of the special corner condition 4.</p>
+            
+            <p>See ISO 16022:2006, Figure F.6</p>
+            
+            </summary>
+            <param name="numRows">Number of rows in the mapping matrix
+            </param>
+            <param name="numColumns">Number of columns in the mapping matrix
+            </param>
+            <returns> byte from the Corner condition 4
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.BitMatrixParser.extractDataRegion(com.google.zxing.common.BitMatrix)">
+            <summary> <p>Extracts the data region from a {@link BitMatrix} that contains
+            alignment patterns.</p>
+            
+            </summary>
+            <param name="bitMatrix">Original {@link BitMatrix} with alignment patterns
+            </param>
+            <returns> BitMatrix that has the alignment patterns removed
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.datamatrix.DataMatrixReader">
+            <summary> This implementation can detect and decode Data Matrix codes in an image.
+            
+            </summary>
+            <author>  bbrown@google.com (Brian Brown)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.DataMatrixReader.decode(com.google.zxing.BinaryBitmap)">
+            <summary> Locates and decodes a Data Matrix code in an image.
+            
+            </summary>
+            <returns> a String representing the content encoded by the Data Matrix code
+            </returns>
+            <throws>  ReaderException if a Data Matrix code cannot be found, or cannot be decoded </throws>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.DataMatrixReader.extractPureBits(com.google.zxing.common.BitMatrix)">
+            <summary> This method detects a Data Matrix code in a "pure" image -- that is, pure monochrome image
+            which contains only an unrotated, unskewed, image of a Data Matrix code, with some white border
+            around it. This is a specialized method that works exceptionally fast in this special
+            case.
+            </summary>
+        </member>
+        <member name="T:com.google.zxing.common.GridSampler">
+            <summary> Implementations of this class can, given locations of finder patterns for a QR code in an
+            image, sample the right points in the image to reconstruct the QR code, accounting for
+            perspective distortion. It is abstracted since it is relatively expensive and should be allowed
+            to take advantage of platform-specific optimized implementations, like Sun's Java Advanced
+            Imaging library, but which may not be available in other environments such as J2ME, and vice
+            versa.
+            
+            The implementation used can be controlled by calling {@link #setGridSampler(GridSampler)}
+            with an instance of a class which implements this interface.
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.common.GridSampler.setGridSampler(com.google.zxing.common.GridSampler)">
+            <summary> Sets the implementation of {@link GridSampler} used by the library. One global
+            instance is stored, which may sound problematic. But, the implementation provided
+            ought to be appropriate for the entire platform, and all uses of this library
+            in the whole lifetime of the JVM. For instance, an Android activity can swap in
+            an implementation that takes advantage of native platform libraries.
+            
+            </summary>
+            <param name="newGridSampler">The platform-specific object to install.
+            </param>
+        </member>
+        <member name="M:com.google.zxing.common.GridSampler.sampleGrid(com.google.zxing.common.BitMatrix,System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary> <p>Samples an image for a square matrix of bits of the given dimension. This is used to extract
+            the black/white modules of a 2D barcode like a QR Code found in an image. Because this barcode
+            may be rotated or perspective-distorted, the caller supplies four points in the source image
+            that define known points in the barcode, so that the image may be sampled appropriately.</p>
+            
+            <p>The last eight "from" parameters are four X/Y coordinate pairs of locations of points in
+            the image that define some significant points in the image to be sample. For example,
+            these may be the location of finder pattern in a QR Code.</p>
+            
+            <p>The first eight "to" parameters are four X/Y coordinate pairs measured in the destination
+            {@link BitMatrix}, from the top left, where the known points in the image given by the "from"
+            parameters map to.</p>
+            
+            <p>These 16 parameters define the transformation needed to sample the image.</p>
+            
+            </summary>
+            <param name="image">image to sample
+            </param>
+            <param name="dimension">width/height of {@link BitMatrix} to sample from image
+            </param>
+            <returns> {@link BitMatrix} representing a grid of points sampled from the image within a region
+            defined by the "from" parameters
+            </returns>
+            <throws>  ReaderException if image can't be sampled, for example, if the transformation defined </throws>
+            <summary>   by the given points is invalid or results in sampling outside the image boundaries
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.common.GridSampler.checkAndNudgePoints(com.google.zxing.common.BitMatrix,System.Single[])">
+            <summary> <p>Checks a set of points that have been transformed to sample points on an image against
+            the image's dimensions to see if the point are even within the image.</p>
+            
+            <p>This method will actually "nudge" the endpoints back onto the image if they are found to be
+            barely (less than 1 pixel) off the image. This accounts for imperfect detection of finder
+            patterns in an image where the QR Code runs all the way to the image border.</p>
+            
+            <p>For efficiency, the method will check points from either end of the line until one is found
+            to be within the image. Because the set of points are assumed to be linear, this is valid.</p>
+            
+            </summary>
+            <param name="image">image into which the points should map
+            </param>
+            <param name="points">actual points in x1,y1,...,xn,yn form
+            </param>
+            <throws>  ReaderException if an endpoint is lies outside the image boundaries </throws>
+        </member>
+        <member name="P:com.google.zxing.common.GridSampler.Instance">
+            <returns> the current implementation of {@link GridSampler}
+            </returns>
+        </member>
+        <member name="T:SupportClass">
+            <summary>
+            Contains conversion support elements such as classes, interfaces and static methods.
+            </summary>
+        </member>
+        <member name="M:SupportClass.ToByteArray(System.SByte[])">
+            <summary>
+            Converts an array of sbytes to an array of bytes
+            </summary>
+            <param name="sbyteArray">The array of sbytes to be converted</param>
+            <returns>The new array of bytes</returns>
+        </member>
+        <member name="M:SupportClass.ToByteArray(System.String)">
+            <summary>
+            Converts a string to an array of bytes
+            </summary>
+            <param name="sourceString">The string to be converted</param>
+            <returns>The new array of bytes</returns>
+        </member>
+        <member name="M:SupportClass.ToByteArray(System.Object[])">
+            <summary>
+            Converts a array of object-type instances to a byte-type array.
+            </summary>
+            <param name="tempObjectArray">Array to convert.</param>
+            <returns>An array of byte type elements.</returns>
+        </member>
+        <member name="M:SupportClass.URShift(System.Int32,System.Int32)">
+            <summary>
+            Performs an unsigned bitwise right shift with the specified number
+            </summary>
+            <param name="number">Number to operate on</param>
+            <param name="bits">Ammount of bits to shift</param>
+            <returns>The resulting number from the shift operation</returns>
+        </member>
+        <member name="M:SupportClass.URShift(System.Int32,System.Int64)">
+            <summary>
+            Performs an unsigned bitwise right shift with the specified number
+            </summary>
+            <param name="number">Number to operate on</param>
+            <param name="bits">Ammount of bits to shift</param>
+            <returns>The resulting number from the shift operation</returns>
+        </member>
+        <member name="M:SupportClass.URShift(System.Int64,System.Int32)">
+            <summary>
+            Performs an unsigned bitwise right shift with the specified number
+            </summary>
+            <param name="number">Number to operate on</param>
+            <param name="bits">Ammount of bits to shift</param>
+            <returns>The resulting number from the shift operation</returns>
+        </member>
+        <member name="M:SupportClass.URShift(System.Int64,System.Int64)">
+            <summary>
+            Performs an unsigned bitwise right shift with the specified number
+            </summary>
+            <param name="number">Number to operate on</param>
+            <param name="bits">Ammount of bits to shift</param>
+            <returns>The resulting number from the shift operation</returns>
+        </member>
+        <member name="M:SupportClass.Identity(System.Int64)">
+            <summary>
+            This method returns the literal value received
+            </summary>
+            <param name="literal">The literal to return</param>
+            <returns>The received value</returns>
+        </member>
+        <member name="M:SupportClass.Identity(System.UInt64)">
+            <summary>
+            This method returns the literal value received
+            </summary>
+            <param name="literal">The literal to return</param>
+            <returns>The received value</returns>
+        </member>
+        <member name="M:SupportClass.Identity(System.Single)">
+            <summary>
+            This method returns the literal value received
+            </summary>
+            <param name="literal">The literal to return</param>
+            <returns>The received value</returns>
+        </member>
+        <member name="M:SupportClass.Identity(System.Double)">
+            <summary>
+            This method returns the literal value received
+            </summary>
+            <param name="literal">The literal to return</param>
+            <returns>The received value</returns>
+        </member>
+        <member name="M:SupportClass.GetCharsFromString(System.String,System.Int32,System.Int32,System.Char[],System.Int32)">
+            <summary>
+            Copies an array of chars obtained from a String into a specified array of chars
+            </summary>
+            <param name="sourceString">The String to get the chars from</param>
+            <param name="sourceStart">Position of the String to start getting the chars</param>
+            <param name="sourceEnd">Position of the String to end getting the chars</param>
+            <param name="destinationArray">Array to return the chars</param>
+            <param name="destinationStart">Position of the destination array of chars to start storing the chars</param>
+            <returns>An array of chars</returns>
+        </member>
+        <member name="M:SupportClass.SetCapacity(System.Collections.Generic.List{System.Object},System.Int32)">
+            <summary>
+            Sets the capacity for the specified ArrayList
+            </summary>
+            <param name="vector">The ArrayList which capacity will be set</param>
+            <param name="newCapacity">The new capacity value</param>
+        </member>
+        <member name="M:SupportClass.ToSByteArray(System.Byte[])">
+            <summary>
+            Receives a byte array and returns it transformed in an sbyte array
+            </summary>
+            <param name="byteArray">Byte array to process</param>
+            <returns>The transformed array</returns>
+        </member>
+        <member name="T:com.google.zxing.Result">
+            <summary> <p>Encapsulates the result of decoding a barcode within an image.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="P:com.google.zxing.Result.Text">
+            <returns> raw text encoded by the barcode, if applicable, otherwise <code>null</code>
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.Result.RawBytes">
+            <returns> raw bytes encoded by the barcode, if applicable, otherwise <code>null</code>
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.Result.ResultPoints">
+            <returns> points related to the barcode in the image. These are typically points
+            identifying finder patterns or the corners of the barcode. The exact meaning is
+            specific to the type of barcode that was decoded.
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.Result.BarcodeFormat">
+            <returns> {@link BarcodeFormat} representing the format of the barcode that was decoded
+            </returns>
+        </member>
+        <member name="P:com.google.zxing.Result.ResultMetadata">
+            <returns> {@link Hashtable} mapping {@link ResultMetadataType} keys to values. May be
+            <code>null</code>. This contains optional metadata about what was detected about the barcode,
+            like orientation.
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.Version">
+            <summary> See ISO 18004:2006 Annex D
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="F:com.google.zxing.qrcode.decoder.Version.VERSION_DECODE_INFO">
+            <summary> See ISO 18004:2006 Annex D.
+            Element i represents the raw version bits that specify version i + 7
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.Version.getProvisionalVersionForDimension(System.Int32)">
+            <summary> <p>Deduces version information purely from QR Code dimensions.</p>
+            
+            </summary>
+            <param name="dimension">dimension in modules
+            </param>
+            <returns> {@link Version} for a QR Code of that dimension
+            </returns>
+            <throws>  ReaderException if dimension is not 1 mod 4 </throws>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.Version.buildFunctionPattern">
+            <summary> See ISO 18004:2006 Annex E</summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.Version.buildVersions">
+            <summary> See ISO 18004:2006 6.5.1 Table 9</summary>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.Version.ECBlocks">
+            <summary> <p>Encapsulates a set of error-correction blocks in one symbol version. Most versions will
+            use blocks of differing sizes within one version, so, this encapsulates the parameters for
+            each set of blocks. It also holds the number of error-correction codewords per block since it
+            will be the same across all blocks within one version.</p>
+            </summary>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.Version.ECB">
+            <summary> <p>Encapsualtes the parameters for one error-correction block in one symbol version.
+            This includes the number of data codewords, and the number of times a block with these
+            parameters is used consecutively in the QR code version's format.</p>
+            </summary>
+        </member>
+        <member name="T:com.google.zxing.oned.MultiFormatOneDReader">
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.EncodeHintType">
+            <summary> These are a set of hints that you may pass to Writers to specify their behavior.
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="F:com.google.zxing.EncodeHintType.ERROR_CORRECTION">
+            <summary> Specifies what degree of error correction to use, for example in QR Codes (type Integer).</summary>
+        </member>
+        <member name="F:com.google.zxing.EncodeHintType.CHARACTER_SET">
+            <summary> Specifies what character encoding to use where applicable (type String)</summary>
+        </member>
+        <member name="T:com.google.zxing.common.Collections">
+            <summary> <p>This is basically a substitute for <code>java.util.Collections</code>, which is not
+            present in MIDP 2.0 / CLDC 1.1.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.common.Collections.insertionSort(System.Collections.Generic.List{System.Object},com.google.zxing.common.Comparator)">
+            <summary> Sorts its argument (destructively) using insert sort; in the context of this package
+            insertion sort is simple and efficient given its relatively small inputs.
+            
+            </summary>
+            <param name="vector">vector to sort
+            </param>
+            <param name="comparator">comparator to define sort ordering
+            </param>
+        </member>
+        <member name="T:com.google.zxing.qrcode.QRCodeReader">
+            <summary> This implementation can detect and decode QR Codes in an image.
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.qrcode.QRCodeReader.decode(com.google.zxing.BinaryBitmap)">
+            <summary> Locates and decodes a QR code in an image.
+            
+            </summary>
+            <returns> a String representing the content encoded by the QR code
+            </returns>
+            <throws>  ReaderException if a QR code cannot be found, or cannot be decoded </throws>
+        </member>
+        <member name="M:com.google.zxing.qrcode.QRCodeReader.extractPureBits(com.google.zxing.common.BitMatrix)">
+            <summary> This method detects a barcode in a "pure" image -- that is, pure monochrome image
+            which contains only an unrotated, unskewed, image of a barcode, with some white border
+            around it. This is a specialized method that works exceptionally fast in this special
+            case.
+            </summary>
+        </member>
+        <member name="T:com.google.zxing.qrcode.encoder.QRCode">
+            <author>  satorux@google.com (Satoru Takabayashi) - creator
+            </author>
+            <author>  dswitkin@google.com (Daniel Switkin) - ported from C++
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.qrcode.detector.FinderPattern">
+            <summary> <p>Encapsulates a finder pattern, which are the three square patterns found in
+            the corners of QR Codes. It also encapsulates a count of similar finder patterns,
+            as a convenience to the finder's bookkeeping.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.FinderPattern.aboutEquals(System.Single,System.Single,System.Single)">
+            <summary> <p>Determines if this finder pattern "about equals" a finder pattern at the stated
+            position and size -- meaning, it is at nearly the same center with nearly the same size.</p>
+            </summary>
+        </member>
+        <member name="T:com.google.zxing.oned.Code128Reader">
+            <summary> <p>Decodes Code 128 barcodes.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.qrcode.QRCodeWriter">
+            <summary> This object renders a QR Code as a ByteMatrix 2D array of greyscale values.
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.qrcode.detector.Detector">
+            <summary> <p>Encapsulates logic that can detect a QR Code in an image, even if the QR Code
+            is rotated or skewed, or partially obscured.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.Detector.detect">
+            <summary> <p>Detects a QR Code in an image, simply.</p>
+            
+            </summary>
+            <returns> {@link DetectorResult} encapsulating results of detecting a QR Code
+            </returns>
+            <throws>  ReaderException if no QR Code can be found </throws>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.Detector.detect(System.Collections.Generic.Dictionary{System.Object,System.Object})">
+            <summary> <p>Detects a QR Code in an image, simply.</p>
+            
+            </summary>
+            <param name="hints">optional hints to detector
+            </param>
+            <returns> {@link DetectorResult} encapsulating results of detecting a QR Code
+            </returns>
+            <throws>  ReaderException if no QR Code can be found </throws>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.Detector.computeDimension(com.google.zxing.ResultPoint,com.google.zxing.ResultPoint,com.google.zxing.ResultPoint,System.Single)">
+            <summary> <p>Computes the dimension (number of modules on a size) of the QR Code based on the position
+            of the finder patterns and estimated module size.</p>
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.Detector.calculateModuleSize(com.google.zxing.ResultPoint,com.google.zxing.ResultPoint,com.google.zxing.ResultPoint)">
+            <summary> <p>Computes an average estimated module size based on estimated derived from the positions
+            of the three finder patterns.</p>
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.Detector.calculateModuleSizeOneWay(com.google.zxing.ResultPoint,com.google.zxing.ResultPoint)">
+            <summary> <p>Estimates module size based on two finder patterns -- it uses
+            {@link #sizeOfBlackWhiteBlackRunBothWays(int, int, int, int)} to figure the
+            width of each, measuring along the axis between their centers.</p>
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:com.google.zxing.qrcode.detector.Detector.sizeOfBlackWhiteBlackRunBothWays(System.Int32,System.Int32,System.Int32,System.Int32)" -->
+        <member name="M:com.google.zxing.qrcode.detector.Detector.sizeOfBlackWhiteBlackRun(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary> <p>This method traces a line from a point in the image, in the direction towards another point.
+            It begins in a black region, and keeps going until it finds white, then black, then white again.
+            It reports the distance from the start to this point.</p>
+            
+            <p>This is used when figuring out how wide a finder pattern is, when the finder pattern
+            may be skewed or rotated.</p>
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.Detector.findAlignmentInRegion(System.Single,System.Int32,System.Int32,System.Single)">
+            <summary> <p>Attempts to locate an alignment pattern in a limited region of the image, which is
+            guessed to contain it. This method uses {@link AlignmentPattern}.</p>
+            
+            </summary>
+            <param name="overallEstModuleSize">estimated module size so far
+            </param>
+            <param name="estAlignmentX">x coordinate of center of area probably containing alignment pattern
+            </param>
+            <param name="estAlignmentY">y coordinate of above
+            </param>
+            <param name="allowanceFactor">number of pixels in all directions to search from the center
+            </param>
+            <returns> {@link AlignmentPattern} if found, or null otherwise
+            </returns>
+            <throws>  ReaderException if an unexpected error occurs during detection </throws>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.Detector.round(System.Single)">
+            <summary> Ends up being a bit faster than Math.round(). This merely rounds its argument to the nearest int,
+            where x.5 rounds up.
+            </summary>
+        </member>
+        <member name="T:com.google.zxing.common.reedsolomon.ReedSolomonEncoder">
+            <summary> <p>Implements Reed-Solomon enbcoding, as the name implies.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>  William Rucklidge
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.ResultMetadataType">
+            <summary> Represents some type of metadata about the result of the decoding that the decoder
+            wishes to communicate back to the caller.
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="F:com.google.zxing.ResultMetadataType.OTHER">
+            <summary> Unspecified, application-specific metadata. Maps to an unspecified {@link Object}.</summary>
+        </member>
+        <member name="F:com.google.zxing.ResultMetadataType.ORIENTATION">
+            <summary> Denotes the likely approximate orientation of the barcode in the image. This value
+            is given as degrees rotated clockwise from the normal, upright orientation.
+            For example a 1D barcode which was found by reading top-to-bottom would be
+            said to have orientation "90". This key maps to an {@link Integer} whose
+            value is in the range [0,360).
+            </summary>
+        </member>
+        <member name="F:com.google.zxing.ResultMetadataType.BYTE_SEGMENTS">
+            <summary> <p>2D barcode formats typically encode text, but allow for a sort of 'byte mode'
+            which is sometimes used to encode binary data. While {@link Result} makes available
+            the complete raw bytes in the barcode for these formats, it does not offer the bytes
+            from the byte segments alone.</p>
+            
+            <p>This maps to a {@link java.util.Vector} of byte arrays corresponding to the
+            raw bytes in the byte segments in the barcode, in order.</p>
+            </summary>
+        </member>
+        <member name="F:com.google.zxing.ResultMetadataType.ERROR_CORRECTION_LEVEL">
+            <summary> Error correction level used, if applicable. The value type depends on the
+            format, but is typically a String.
+            </summary>
+        </member>
+        <member name="T:com.google.zxing.qrcode.detector.FinderPatternInfo">
+            <summary> <p>Encapsulates information about finder patterns in an image, including the location of
+            the three finder patterns, and their estimated module size.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.common.detector.MonochromeRectangleDetector">
+            <summary> <p>A somewhat generic detector that looks for a barcode-like rectangular region within an image.
+            It looks within a mostly white region of an image for a region of black and white, but mostly
+            black. It returns the four corners of the region, as best it can determine.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.common.detector.MonochromeRectangleDetector.detect">
+            <summary> <p>Detects a rectangular region of black and white -- mostly black -- with a region of mostly
+            white, in an image.</p>
+            
+            </summary>
+            <returns> {@link ResultPoint}[] describing the corners of the rectangular region. The first and
+            last points are opposed on the diagonal, as are the second and third. The first point will be
+            the topmost point and the last, the bottommost. The second point will be leftmost and the
+            third, the rightmost
+            </returns>
+            <throws>  ReaderException if no Data Matrix Code can be found </throws>
+        </member>
+        <member name="M:com.google.zxing.common.detector.MonochromeRectangleDetector.findCornerFromCenter(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary> Attempts to locate a corner of the barcode by scanning up, down, left or right from a center
+            point which should be within the barcode.
+            
+            </summary>
+            <param name="centerX">center's x component (horizontal)
+            </param>
+            <param name="deltaX">same as deltaY but change in x per step instead
+            </param>
+            <param name="left">minimum value of x
+            </param>
+            <param name="right">maximum value of x
+            </param>
+            <param name="centerY">center's y component (vertical)
+            </param>
+            <param name="deltaY">change in y per step. If scanning up this is negative; down, positive;
+            left or right, 0
+            </param>
+            <param name="top">minimum value of y to search through (meaningless when di == 0)
+            </param>
+            <param name="bottom">maximum value of y
+            </param>
+            <param name="maxWhiteRun">maximum run of white pixels that can still be considered to be within
+            the barcode
+            </param>
+            <returns> a {@link com.google.zxing.ResultPoint} encapsulating the corner that was found
+            </returns>
+            <throws>  com.google.zxing.ReaderException if such a point cannot be found </throws>
+        </member>
+        <member name="M:com.google.zxing.common.detector.MonochromeRectangleDetector.blackWhiteRange(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary> Computes the start and end of a region of pixels, either horizontally or vertically, that could
+            be part of a Data Matrix barcode.
+            
+            </summary>
+            <param name="fixedDimension">if scanning horizontally, this is the row (the fixed vertical location)
+            where we are scanning. If scanning vertically it's the column, the fixed horizontal location
+            </param>
+            <param name="maxWhiteRun">largest run of white pixels that can still be considered part of the
+            barcode region
+            </param>
+            <param name="minDim">minimum pixel location, horizontally or vertically, to consider
+            </param>
+            <param name="maxDim">maximum pixel location, horizontally or vertically, to consider
+            </param>
+            <param name="horizontal">if true, we're scanning left-right, instead of up-down
+            </param>
+            <returns> int[] with start and end of found range, or null if no such range is found
+            (e.g. only white was found)
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.common.BitArray">
+            <summary> <p>A simple, fast array of bits, represented compactly by an array of ints internally.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.common.BitArray.get_Renamed(System.Int32)">
+            <param name="i">bit to get
+            </param>
+            <returns> true iff bit i is set
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.common.BitArray.set_Renamed(System.Int32)">
+            <summary> Sets bit i.
+            
+            </summary>
+            <param name="i">bit to set
+            </param>
+        </member>
+        <member name="M:com.google.zxing.common.BitArray.flip(System.Int32)">
+            <summary> Flips bit i.
+            
+            </summary>
+            <param name="i">bit to set
+            </param>
+        </member>
+        <member name="M:com.google.zxing.common.BitArray.setBulk(System.Int32,System.Int32)">
+            <summary> Sets a block of 32 bits, starting at bit i.
+            
+            </summary>
+            <param name="i">first bit to set
+            </param>
+            <param name="newBits">the new value of the next 32 bits. Note again that the least-significant bit
+            corresponds to bit i, the next-least-significant to i+1, and so on.
+            </param>
+        </member>
+        <member name="M:com.google.zxing.common.BitArray.clear">
+            <summary> Clears all bits (sets to false).</summary>
+        </member>
+        <member name="M:com.google.zxing.common.BitArray.isRange(System.Int32,System.Int32,System.Boolean)">
+            <summary> Efficient method to check if a range of bits is set, or not set.
+            
+            </summary>
+            <param name="start">start of range, inclusive.
+            </param>
+            <param name="end">end of range, exclusive
+            </param>
+            <param name="value">if true, checks that bits in range are set, otherwise checks that they are not set
+            </param>
+            <returns> true iff all bits are set or not set in range, according to value argument
+            </returns>
+            <throws>  IllegalArgumentException if end is less than or equal to start </throws>
+        </member>
+        <member name="M:com.google.zxing.common.BitArray.getBitArray">
+            <returns> underlying array of ints. The first element holds the first 32 bits, and the least
+            significant bit is bit 0.
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.common.BitArray.reverse">
+            <summary> Reverses all bits in the array.</summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:com.google.zxing.qrcode.detector.AlignmentPatternFinder" -->
+        <member name="M:com.google.zxing.qrcode.detector.AlignmentPatternFinder.#ctor(com.google.zxing.common.BitMatrix,System.Int32,System.Int32,System.Int32,System.Int32,System.Single,com.google.zxing.ResultPointCallback)">
+            <summary> <p>Creates a finder that will look in a portion of the whole image.</p>
+            
+            </summary>
+            <param name="image">image to search
+            </param>
+            <param name="startX">left column from which to start searching
+            </param>
+            <param name="startY">top row from which to start searching
+            </param>
+            <param name="width">width of region to search
+            </param>
+            <param name="height">height of region to search
+            </param>
+            <param name="moduleSize">estimated module size so far
+            </param>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.AlignmentPatternFinder.find">
+            <summary> <p>This method attempts to find the bottom-right alignment pattern in the image. It is a bit messy since
+            it's pretty performance-critical and so is written to be fast foremost.</p>
+            
+            </summary>
+            <returns> {@link AlignmentPattern} if found
+            </returns>
+            <throws>  ReaderException if not found </throws>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.AlignmentPatternFinder.centerFromEnd(System.Int32[],System.Int32)">
+            <summary> Given a count of black/white/black pixels just seen and an end position,
+            figures the location of the center of this black/white/black run.
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.AlignmentPatternFinder.foundPatternCross(System.Int32[])">
+            <param name="stateCount">count of black/white/black pixels just read
+            </param>
+            <returns> true iff the proportions of the counts is close enough to the 1/1/1 ratios
+            used by alignment patterns to be considered a match
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.AlignmentPatternFinder.crossCheckVertical(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary> <p>After a horizontal scan finds a potential alignment pattern, this method
+            "cross-checks" by scanning down vertically through the center of the possible
+            alignment pattern to see if the same proportion is detected.</p>
+            
+            </summary>
+            <param name="startI">row where an alignment pattern was detected
+            </param>
+            <param name="centerJ">center of the section that appears to cross an alignment pattern
+            </param>
+            <param name="maxCount">maximum reasonable number of modules that should be
+            observed in any reading state, based on the results of the horizontal scan
+            </param>
+            <returns> vertical center of alignment pattern, or {@link Float#NaN} if not found
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.AlignmentPatternFinder.handlePossibleCenter(System.Int32[],System.Int32,System.Int32)">
+            <summary> <p>This is called when a horizontal scan finds a possible alignment pattern. It will
+            cross check with a vertical scan, and if successful, will see if this pattern had been
+            found on a previous horizontal scan. If so, we consider it confirmed and conclude we have
+            found the alignment pattern.</p>
+            
+            </summary>
+            <param name="stateCount">reading state module counts from horizontal scan
+            </param>
+            <param name="i">row where alignment pattern may be found
+            </param>
+            <param name="j">end of possible alignment pattern in row
+            </param>
+            <returns> {@link AlignmentPattern} if we have found the same pattern twice, or null if not
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.DataBlock">
+            <summary> <p>Encapsulates a block of data within a QR Code. QR Codes may split their data into
+            multiple blocks, each of which is a unit of data and error-correction codewords. Each
+            is represented by an instance of this class.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.DataBlock.getDataBlocks(System.SByte[],com.google.zxing.qrcode.decoder.Version,com.google.zxing.qrcode.decoder.ErrorCorrectionLevel)">
+            <summary> <p>When QR Codes use multiple data blocks, they are actually interleaved.
+            That is, the first byte of data block 1 to n is written, then the second bytes, and so on. This
+            method will separate the data into original blocks.</p>
+            
+            </summary>
+            <param name="rawCodewords">bytes as read directly from the QR Code
+            </param>
+            <param name="version">version of the QR Code
+            </param>
+            <param name="ecLevel">error-correction level of the QR Code
+            </param>
+            <returns> {@link DataBlock}s containing original bytes, "de-interleaved" from representation in the
+            QR Code
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.DecodeHintType">
+            <summary> Encapsulates a type of hint that a caller may pass to a barcode reader to help it
+            more quickly or accurately decode it. It is up to implementations to decide what,
+            if anything, to do with the information that is supplied.
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+            <seealso cref="!:Reader.decode(BinaryBitmap,java.util.Hashtable)">
+            </seealso>
+        </member>
+        <member name="F:com.google.zxing.DecodeHintType.OTHER">
+            <summary> Unspecified, application-specific hint. Maps to an unspecified {@link Object}.</summary>
+        </member>
+        <member name="F:com.google.zxing.DecodeHintType.PURE_BARCODE">
+            <summary> Image is a pure monochrome image of a barcode. Doesn't matter what it maps to;
+            use {@link Boolean#TRUE}.
+            </summary>
+        </member>
+        <member name="F:com.google.zxing.DecodeHintType.POSSIBLE_FORMATS">
+            <summary> Image is known to be of one of a few possible formats.
+            Maps to a {@link java.util.Vector} of {@link BarcodeFormat}s.
+            </summary>
+        </member>
+        <member name="F:com.google.zxing.DecodeHintType.TRY_HARDER">
+            <summary> Spend more time to try to find a barcode; optimize for accuracy, not speed.
+            Doesn't matter what it maps to; use {@link Boolean#TRUE}.
+            </summary>
+        </member>
+        <member name="F:com.google.zxing.DecodeHintType.ALLOWED_LENGTHS">
+            <summary> Allowed lengths of encoded data -- reject anything else. Maps to an int[].</summary>
+        </member>
+        <member name="F:com.google.zxing.DecodeHintType.ASSUME_CODE_39_CHECK_DIGIT">
+            <summary> Assume Code 39 codes employ a check digit. Maps to {@link Boolean}.</summary>
+        </member>
+        <member name="F:com.google.zxing.DecodeHintType.NEED_RESULT_POINT_CALLBACK">
+            <summary> The caller needs to be notified via callback when a possible {@link ResultPoint}
+            is found. Maps to a {@link ResultPointCallback}.
+            </summary>
+        </member>
+        <member name="T:com.google.zxing.common.BitSource">
+            <summary> <p>This provides an easy abstraction to read bits at a time from a sequence of bytes, where the
+            number of bits read is not often a multiple of 8.</p>
+            
+            <p>This class is thread-safe but not reentrant. Unless the caller modifies the bytes array
+            it passed in, in which case all bets are off.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.common.BitSource.#ctor(System.SByte[])">
+            <param name="bytes">bytes from which this will read bits. Bits will be read from the first byte first.
+            Bits are read within a byte from most-significant to least-significant bit.
+            </param>
+        </member>
+        <member name="M:com.google.zxing.common.BitSource.readBits(System.Int32)">
+            <param name="numBits">number of bits to read
+            </param>
+            <returns> int representing the bits read. The bits will appear as the least-significant
+            bits of the int
+            </returns>
+            <throws>  IllegalArgumentException if numBits isn't in [1,32] </throws>
+        </member>
+        <member name="M:com.google.zxing.common.BitSource.available">
+            <returns> number of bits that can be read successfully
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.oned.MultiFormatUPCEANReader">
+            <summary> <p>A reader that can read all available UPC/EAN formats. If a caller wants to try to
+            read all such formats, it is most efficient to use this implementation rather than invoke
+            individual readers.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.oned.EAN8Writer">
+            <summary> This object renders an EAN8 code as a ByteMatrix 2D array of greyscale
+            values.
+            
+            </summary>
+            <author>  aripollak@gmail.com (Ari Pollak)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.oned.EAN8Writer.encode(System.String)">
+            <returns> a byte array of horizontal pixels (0 = white, 1 = black) 
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.oned.EAN8Reader">
+            <summary> <p>Implements decoding of the EAN-8 format.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.datamatrix.decoder.Decoder">
+            <summary> <p>The main class which implements Data Matrix Code decoding -- as opposed to locating and extracting
+            the Data Matrix Code from an image.</p>
+            
+            </summary>
+            <author>  bbrown@google.com (Brian Brown)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.Decoder.decode(System.Boolean[][])">
+            <summary> <p>Convenience method that can decode a Data Matrix Code represented as a 2D array of booleans.
+            "true" is taken to mean a black module.</p>
+            
+            </summary>
+            <param name="image">booleans representing white/black Data Matrix Code modules
+            </param>
+            <returns> text and bytes encoded within the Data Matrix Code
+            </returns>
+            <throws>  ReaderException if the Data Matrix Code cannot be decoded </throws>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.Decoder.decode(com.google.zxing.common.BitMatrix)">
+            <summary> <p>Decodes a Data Matrix Code represented as a {@link BitMatrix}. A 1 or "true" is taken
+            to mean a black module.</p>
+            
+            </summary>
+            <param name="bits">booleans representing white/black Data Matrix Code modules
+            </param>
+            <returns> text and bytes encoded within the Data Matrix Code
+            </returns>
+            <throws>  ReaderException if the Data Matrix Code cannot be decoded </throws>
+        </member>
+        <member name="M:com.google.zxing.datamatrix.decoder.Decoder.correctErrors(System.SByte[],System.Int32)">
+            <summary> <p>Given data and error-correction codewords received, possibly corrupted by errors, attempts to
+            correct the errors in-place using Reed-Solomon error correction.</p>
+            
+            </summary>
+            <param name="codewordBytes">data and error correction codewords
+            </param>
+            <param name="numDataCodewords">number of codewords that are data bytes
+            </param>
+            <throws>  ReaderException if error correction fails </throws>
+        </member>
+        <member name="T:com.google.zxing.WriterException">
+            <summary> A base class which covers the range of exceptions which may occur when encoding a barcode using
+            the Writer framework.
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>	
+        </member>
+        <member name="T:com.google.zxing.qrcode.encoder.Encoder">
+            <author>  satorux@google.com (Satoru Takabayashi) - creator
+            </author>
+            <author>  dswitkin@google.com (Daniel Switkin) - ported from C++
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.qrcode.encoder.Encoder.encode(System.String,com.google.zxing.qrcode.decoder.ErrorCorrectionLevel,com.google.zxing.qrcode.encoder.QRCode)">
+            <summary>  Encode "bytes" with the error correction level "ecLevel". The encoding mode will be chosen
+            internally by chooseMode(). On success, store the result in "qrCode".
+            
+            We recommend you to use QRCode.EC_LEVEL_L (the lowest level) for
+            "getECLevel" since our primary use is to show QR code on desktop screens. We don't need very
+            strong error correction for this purpose.
+            
+            Note that there is no way to encode bytes in MODE_KANJI. We might want to add EncodeWithMode()
+            with which clients can specify the encoding mode. For now, we don't need the functionality.
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.encoder.Encoder.getAlphanumericCode(System.Int32)">
+            <returns> the code point of the table used in alphanumeric mode or
+            -1 if there is no corresponding code in the table.
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.qrcode.encoder.Encoder.chooseMode(System.String,System.String)">
+            <summary> Choose the best mode by examining the content. Note that 'encoding' is used as a hint;
+            if it is Shift_JIS, and the input is only double-byte Kanji, then we return {@link Mode#KANJI}.
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.encoder.Encoder.initQRCode(System.Int32,com.google.zxing.qrcode.decoder.ErrorCorrectionLevel,com.google.zxing.qrcode.decoder.Mode,com.google.zxing.qrcode.encoder.QRCode)">
+            <summary> Initialize "qrCode" according to "numInputBytes", "ecLevel", and "mode". On success,
+            modify "qrCode".
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.encoder.Encoder.terminateBits(System.Int32,com.google.zxing.qrcode.encoder.BitVector)">
+            <summary> Terminate bits as described in 8.4.8 and 8.4.9 of JISX0510:2004 (p.24).</summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.encoder.Encoder.getNumDataBytesAndNumECBytesForBlockID(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32[],System.Int32[])">
+            <summary> Get number of data bytes and number of error correction bytes for block id "blockID". Store
+            the result in "numDataBytesInBlock", and "numECBytesInBlock". See table 12 in 8.5.1 of
+            JISX0510:2004 (p.30)
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.encoder.Encoder.interleaveWithECBytes(com.google.zxing.qrcode.encoder.BitVector,System.Int32,System.Int32,System.Int32,com.google.zxing.qrcode.encoder.BitVector)">
+            <summary> Interleave "bits" with corresponding error correction bytes. On success, store the result in
+            "result". The interleave rule is complicated. See 8.6 of JISX0510:2004 (p.37) for details.
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.encoder.Encoder.appendModeInfo(com.google.zxing.qrcode.decoder.Mode,com.google.zxing.qrcode.encoder.BitVector)">
+            <summary> Append mode info. On success, store the result in "bits".</summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.encoder.Encoder.appendLengthInfo(System.Int32,System.Int32,com.google.zxing.qrcode.decoder.Mode,com.google.zxing.qrcode.encoder.BitVector)">
+            <summary> Append length info. On success, store the result in "bits".</summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.encoder.Encoder.appendBytes(System.String,com.google.zxing.qrcode.decoder.Mode,com.google.zxing.qrcode.encoder.BitVector,System.String)">
+            <summary> Append "bytes" in "mode" mode (encoding) into "bits". On success, store the result in "bits".</summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:com.google.zxing.qrcode.detector.FinderPatternFinder" -->
+        <member name="M:com.google.zxing.qrcode.detector.FinderPatternFinder.#ctor(com.google.zxing.common.BitMatrix)">
+            <summary> <p>Creates a finder that will search the image for three finder patterns.</p>
+            
+            </summary>
+            <param name="image">image to search
+            </param>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.FinderPatternFinder.centerFromEnd(System.Int32[],System.Int32)">
+            <summary> Given a count of black/white/black/white/black pixels just seen and an end position,
+            figures the location of the center of this run.
+            </summary>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.FinderPatternFinder.foundPatternCross(System.Int32[])">
+            <param name="stateCount">count of black/white/black/white/black pixels just read
+            </param>
+            <returns> true iff the proportions of the counts is close enough to the 1/1/3/1/1 ratios
+            used by finder patterns to be considered a match
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.FinderPatternFinder.crossCheckVertical(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary> <p>After a horizontal scan finds a potential finder pattern, this method
+            "cross-checks" by scanning down vertically through the center of the possible
+            finder pattern to see if the same proportion is detected.</p>
+            
+            </summary>
+            <param name="startI">row where a finder pattern was detected
+            </param>
+            <param name="centerJ">center of the section that appears to cross a finder pattern
+            </param>
+            <param name="maxCount">maximum reasonable number of modules that should be
+            observed in any reading state, based on the results of the horizontal scan
+            </param>
+            <returns> vertical center of finder pattern, or {@link Float#NaN} if not found
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.FinderPatternFinder.crossCheckHorizontal(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary> <p>Like {@link #crossCheckVertical(int, int, int, int)}, and in fact is basically identical,
+            except it reads horizontally instead of vertically. This is used to cross-cross
+            check a vertical cross check and locate the real center of the alignment pattern.</p>
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:com.google.zxing.qrcode.detector.FinderPatternFinder.handlePossibleCenter(System.Int32[],System.Int32,System.Int32)" -->
+        <member name="M:com.google.zxing.qrcode.detector.FinderPatternFinder.findRowSkip">
+            <returns> number of rows we could safely skip during scanning, based on the first
+            two finder patterns that have been located. In some cases their position will
+            allow us to infer that the third pattern must lie below a certain point farther
+            down in the image.
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.FinderPatternFinder.haveMultiplyConfirmedCenters">
+            <returns> true iff we have found at least 3 finder patterns that have been detected
+            at least {@link #CENTER_QUORUM} times each, and, the estimated module size of the
+            candidates is "pretty similar"
+            </returns>
+        </member>
+        <member name="M:com.google.zxing.qrcode.detector.FinderPatternFinder.selectBestPatterns">
+            <returns> the 3 best {@link FinderPattern}s from our list of candidates. The "best" are
+            those that have been detected at least {@link #CENTER_QUORUM} times, and whose module
+            size differs from the average among those patterns the least
+            </returns>
+            <throws>  ReaderException if 3 such finder patterns do not exist </throws>
+        </member>
+        <member name="T:com.google.zxing.qrcode.detector.FinderPatternFinder.CenterComparator">
+            <summary> <p>Orders by {@link FinderPattern#getCount()}, descending.</p></summary>
+        </member>
+        <member name="T:com.google.zxing.qrcode.decoder.Mode">
+            <summary> <p>See ISO 18004:2006, 6.4.1, Tables 2 and 3. This enum encapsulates the various modes in which
+            data can be encoded to bits in the QR code standard.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.Mode.forBits(System.Int32)">
+            <param name="bits">four bits encoding a QR Code data mode
+            </param>
+            <returns> {@link Mode} encoded by these bits
+            </returns>
+            <throws>  IllegalArgumentException if bits do not correspond to a known mode </throws>
+        </member>
+        <member name="M:com.google.zxing.qrcode.decoder.Mode.getCharacterCountBits(com.google.zxing.qrcode.decoder.Version)">
+            <param name="version">version in question
+            </param>
+            <returns> number of bits used, in this QR Code symbol {@link Version}, to encode the
+            count of characters that will follow encoded in this {@link Mode}
+            </returns>
+        </member>
+        <member name="T:com.google.zxing.common.PerspectiveTransform">
+            <summary> <p>This class implements a perspective transform in two dimensions. Given four source and four
+            destination points, it will compute the transformation implied between them. The code is based
+            directly upon section 3.4.2 of George Wolberg's "Digital Image Warping"; see pages 54-56.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.common.PerspectiveTransform.transformPoints(System.Single[],System.Single[])">
+            <summary>Convenience method, not optimized for performance. </summary>
+        </member>
+        <member name="T:com.google.zxing.common.DetectorResult">
+            <summary> <p>Encapsulates the result of detecting a barcode in an image. This includes the raw
+            matrix of black/white pixels corresponding to the barcode, and possibly points of interest
+            in the image, like the location of finder patterns or corners of the barcode in the image.</p>
+            
+            </summary>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.oned.UPCAReader">
+            <summary> <p>Implements decoding of the UPC-A format.</p>
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.common.DefaultGridSampler">
+            <author>  Sean Owen
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="T:com.google.zxing.common.ByteArray">
+            <summary> This class implements an array of unsigned bytes.
+            
+            </summary>
+            <author>  dswitkin@google.com (Daniel Switkin)
+            </author>
+            <author>www.Redivivus.in (suraj.supekar@redivivus.in) - Ported from ZXING Java Source 
+            </author>
+        </member>
+        <member name="M:com.google.zxing.common.ByteArray.at(System.Int32)">
+            <summary> Access an unsigned byte at location index.</summary>
+            <param name="index">The index in the array to access.
+            </param>
+            <returns> The unsigned value of the byte as an int.
+            </returns>
+        </member>
+    </members>
+</doc>
