@@ -31,6 +31,7 @@ namespace Authenticator
 
         ApplicationBarMenuItem about;
         ApplicationBarMenuItem donate;
+        ApplicationBarMenuItem settings;
 
         public MainPage()
         {
@@ -70,12 +71,17 @@ namespace Authenticator
             donate.Text = "donate";
             donate.Click += mnuDonate_Click;
 
+            settings = new ApplicationBarMenuItem();
+            settings.Text = "settings";
+            settings.Click += mnuSettings_Click;
+
             // build application bar
             ApplicationBar.Buttons.Add(add);
             ApplicationBar.Buttons.Add(select);
 
             ApplicationBar.MenuItems.Add(about);
             ApplicationBar.MenuItems.Add(donate);
+            ApplicationBar.MenuItems.Add(settings);
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -131,6 +137,11 @@ namespace Authenticator
 
             webBrowserTask.Uri = new Uri("http://mbmccormick.com/donate/", UriKind.Absolute);
             webBrowserTask.Show();
+        }
+
+        private void mnuSettings_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

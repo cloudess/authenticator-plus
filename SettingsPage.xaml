@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="Authenticator.MainPage"
+    x:Class="Authenticator.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -12,7 +12,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True" shell:SystemTray.BackgroundColor="{StaticResource PhoneBackgroundColor}"
     toolkit:TiltEffect.IsTiltEnabled="True"
     Loaded="PhoneApplicationPage_Loaded">
@@ -25,34 +25,13 @@
 
         <StackPanel x:Name="TitlePanel" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="AUTHENTICATOR" Style="{StaticResource PhoneTextNormalStyle}" FontSize="{StaticResource PhoneFontSizeMedium}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
-            <TextBlock x:Name="PageTitle" Text="accounts" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Text="settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <toolkit:MultiselectList x:Name="lstAccounts" Grid.Row="1" SelectionChanged="lstAccounts_SelectionChanged" IsSelectionEnabledChanged="lstAccounts_IsSelectionEnabledChanged">
-            <toolkit:MultiselectList.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel x:Name="LayoutRoot" Background="Transparent" Margin="-12,0,0,0" Tap="ItemContent_Tap">
-                        <TextBlock Text="{Binding Path=AccountName}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                        <TextBlock Text="{Binding Path=Code}" Margin="12,-6,12,24" TextWrapping="NoWrap" Style="{StaticResource PhoneTextExtraLargeStyle}" />
-
-                        <toolkit:ContextMenuService.ContextMenu>
-                            <toolkit:ContextMenu>
-                                <toolkit:MenuItem Header="copy" Click="MenuItem_Click" />
-                                <toolkit:MenuItem Header="delete" Click="MenuItem_Click" />
-                            </toolkit:ContextMenu>
-                        </toolkit:ContextMenuService.ContextMenu>
-                    </StackPanel>
-                </DataTemplate>
-            </toolkit:MultiselectList.ItemTemplate>
-        </toolkit:MultiselectList>
-
-        <TextBlock x:Name="txtEmpty" Grid.Row="1" Margin="24,0,0,0" Text="You haven't set up any of your accounts yet." TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneAccentBrush}" />
-    </Grid>
-
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+        <StackPanel Grid.Row="1">
+            <TextBlock x:Name="txtEmpty" Grid.Row="1" Margin="24,0,0,0" Text="Settings." TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneAccentBrush}" />
+        </StackPanel>        
+    </Grid>   
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
