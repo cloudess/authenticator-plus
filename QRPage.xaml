@@ -12,7 +12,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True" shell:SystemTray.BackgroundColor="{StaticResource PhoneBackgroundColor}"
     toolkit:TiltEffect.IsTiltEnabled="True"
@@ -29,14 +29,13 @@
             <TextBlock x:Name="PageTitle" Text="QR code" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1">
-            <jwqr:QRCodeScanner
-                ScanComplete="QRCodeScanner_ScanComplete"
-                Error="QRCodeScanner_Error"
-                Width="400"
-                Height="400" />
-            <TextBlock x:Name="txtEmpty" Grid.Row="1" Margin="24,0,0,0" Text="QR code." TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneAccentBrush}" />
-        </StackPanel>
+        
+        <jwqr:QRCodeScanner
+            Grid.Row="1"
+            ScanComplete="QRCodeScanner_ScanComplete"
+            Error="QRCodeScanner_Error"
+        />
+            
     </Grid>
 
     <toolkit:TransitionService.NavigationInTransition>
