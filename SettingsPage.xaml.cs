@@ -10,11 +10,14 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using System.IO.IsolatedStorage;
 
 namespace Authenticator
 {
     public partial class SettingsPage : PhoneApplicationPage
     {
+        private IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+
         public SettingsPage()
         {
             InitializeComponent();
@@ -22,7 +25,20 @@ namespace Authenticator
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            //
+            if (settings.Contains("AutomaticTimeUpdate"))
+            {
+                TimeToggleSwitch.IsChecked = (bool)settings["AutomaticTimeUpdate"];
+            }
+        }
+
+        private void TimeToggleSwitch_Click(object sender, RoutedEventArgs e)
+        {
+            if (settings.Contains("AutomaticTimeUpdate"))
+                settings["AutomaticTimeUpdate"] = TimeToggleSwitch.IsChecked;
+            else
+                settings.Add("AutomaticTimeUpdate", TimeToggleSwitch.IsChecked);
+
+            settings.Save();
         }
     }
 }

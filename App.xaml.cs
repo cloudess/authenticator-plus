@@ -37,8 +37,16 @@ namespace Authenticator
         public DateTime CurrentTime
         {
             get
-            {                
-                return DateTime.UtcNow + NTPTimeOffset + UserTimeOffset;
+            {
+                bool auto_time_sync = true;
+                if (IsolatedStorageSettings.ApplicationSettings.Contains("AutomaticTimeUpdate"))
+                    auto_time_sync = (bool)IsolatedStorageSettings.ApplicationSettings["AutomaticTimeUpdate"];
+
+                DateTime current = DateTime.UtcNow + UserTimeOffset;
+                if(auto_time_sync)
+                    current += NTPTimeOffset;
+
+                return current;
             }
         }        
         
