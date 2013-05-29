@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authenticator", "Authenticator.csproj", "{C30FEE87-C49D-4D4A-83BA-AC0698045A4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeffWilcox.Controls.QR", "JeffWilcox.Controls.QR\JeffWilcox.Controls.QR.csproj", "{F47A8668-B209-4215-936C-5EDFED289F26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,14 @@ Global
 		{C30FEE87-C49D-4D4A-83BA-AC0698045A4A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{C30FEE87-C49D-4D4A-83BA-AC0698045A4A}.Release|ARM.ActiveCfg = Release|Any CPU
 		{C30FEE87-C49D-4D4A-83BA-AC0698045A4A}.Release|x86.ActiveCfg = Release|Any CPU
+		{F47A8668-B209-4215-936C-5EDFED289F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F47A8668-B209-4215-936C-5EDFED289F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F47A8668-B209-4215-936C-5EDFED289F26}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F47A8668-B209-4215-936C-5EDFED289F26}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F47A8668-B209-4215-936C-5EDFED289F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F47A8668-B209-4215-936C-5EDFED289F26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F47A8668-B209-4215-936C-5EDFED289F26}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F47A8668-B209-4215-936C-5EDFED289F26}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

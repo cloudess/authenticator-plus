@@ -60,6 +60,18 @@ namespace Authenticator
                 txtSecretKey.Text = (string)State["txtSecretKey"];
             }
 
+            if ((App.Current as App).QRCode != null)
+            {
+                //QR code has been received                
+
+                BarcodeCaptureResult scan_e = new BarcodeCaptureResult();
+                scan_e.State = WP7_Barcode_Library.CaptureState.Success;
+                scan_e.BarcodeText = (App.Current as App).QRCode;
+                (App.Current as App).QRCode = null;
+
+                ScanBarcode_Completed(scan_e);
+            }
+
             base.OnNavigatedTo(e);
         }
 
@@ -71,7 +83,7 @@ namespace Authenticator
 
             base.OnNavigatedFrom(e);
         }
-
+        
         #endregion
 
         #region Event Handlers
@@ -93,8 +105,7 @@ namespace Authenticator
 
         private void btnScanBarcode_Click(object sender, RoutedEventArgs e)
         {
-            WP7BarcodeManager.ScanMode = com.google.zxing.BarcodeFormat.QR_CODE;
-            WP7BarcodeManager.ScanBarcode(ScanBarcode_Completed);
+            NavigationService.Navigate(new Uri("/QRPage.xaml", UriKind.Relative));            
         }
 
         public void ScanBarcode_Completed(BarcodeCaptureResult e)
@@ -139,7 +150,7 @@ namespace Authenticator
                 _application.Application_Closing(null, null);
             }
 
-            NavigationService.GoBack();
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 
         #endregion

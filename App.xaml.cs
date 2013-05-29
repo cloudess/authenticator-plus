@@ -26,6 +26,7 @@ namespace Authenticator
         public bool DataCorruptionException { get; set; }
         
         public PhoneApplicationFrame RootFrame { get; private set; }
+        public string QRCode { get; set; }
 
         protected NtpClient ntpClient;
         protected EventHandler<NtpClient.TimeReceivedEventArgs> timeReceived_handler;
