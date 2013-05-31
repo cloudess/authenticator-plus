@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{2d1aac7b-fca5-407b-8de9-276d9d7c3325}" Title="Authenticator" RuntimeType="Silverlight" Version="1.5.0.0" Genre="apps.normal" Author="Matt McCormick" Description="Authenticator for Windows Phone" Publisher="Authenticator">
+  <App xmlns="" ProductID="{2d1aac7b-fca5-407b-8de9-276d9d7c3325}" Title="Authenticator" RuntimeType="Silverlight" Version="1.6.0.0" Genre="apps.normal" Author="Dima Stebaev and Matt McCormick" Description="Authenticator for Windows Phone" Publisher="Authenticator">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_IDENTITY_DEVICE" />

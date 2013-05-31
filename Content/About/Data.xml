@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <About>
   <App Title="Authenticator"
-       Author="Matt McCormick"
+       Author="Dima Stebaev and Matt McCormick"
        Description=""
        Publisher=""
        AdditionalNotes="This application is not endorsed or certified by Google or the Google Authenticator application.\n\nSwipe right to left for legal notices." />
@@ -16,10 +16,10 @@
       <Links>
         <Link NavigateUri="http://mbmccormick.com"
               Content="http://mbmccormick.com"
-              Label="Website:" />
-        <Link NavigateUri="mailto:authenticator@mbmccormick.com"
-              Content="authenticator@mbmccormick.com"
-              Label="Support:" />
+              Label="Matt McCormick:" />
+        <Link NavigateUri="http://stebaev.com"
+              Content="http://stebaev.com"
+              Label="Dima Stebaev:" />
       </Links>
     </MainItem>
     <Item Title="legal" Type="text">
@@ -34,6 +34,9 @@
 
     </Item>
     <Item Title="what's new?" Type="text">
+      Version 1.6
+      This major release includes an automatic time synchronisation and an improved QR code scanner.
+      
       Version 1.5
       This major release includes a streamlined user interface and refactored code base. It also includes several bug fixes and supports Windows Phone 8.
 
