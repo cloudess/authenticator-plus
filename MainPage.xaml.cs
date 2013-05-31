@@ -29,8 +29,7 @@ namespace Authenticator
         ApplicationBarIconButton select;
         ApplicationBarIconButton delete;
 
-        ApplicationBarMenuItem about;
-        ApplicationBarMenuItem donate;
+        ApplicationBarMenuItem about;        
         ApplicationBarMenuItem settings;
 
         public MainPage()
@@ -65,11 +64,7 @@ namespace Authenticator
 
             about = new ApplicationBarMenuItem();
             about.Text = "about authenticator";
-            about.Click += mnuAbout_Click;
-
-            donate = new ApplicationBarMenuItem();
-            donate.Text = "donate";
-            donate.Click += mnuDonate_Click;
+            about.Click += mnuAbout_Click;            
 
             settings = new ApplicationBarMenuItem();
             settings.Text = "settings";
@@ -80,7 +75,6 @@ namespace Authenticator
             ApplicationBar.Buttons.Add(select);
 
             ApplicationBar.MenuItems.Add(about);
-            ApplicationBar.MenuItems.Add(donate);
             ApplicationBar.MenuItems.Add(settings);
         }
 
@@ -129,14 +123,6 @@ namespace Authenticator
         private void mnuAbout_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/YourLastAboutDialog;component/AboutPage.xaml", UriKind.Relative));
-        }
-        
-        private void mnuDonate_Click(object sender, EventArgs e)
-        {
-            WebBrowserTask webBrowserTask = new WebBrowserTask();
-
-            webBrowserTask.Uri = new Uri("http://mbmccormick.com/donate/", UriKind.Absolute);
-            webBrowserTask.Show();
         }
 
         private void mnuSettings_Click(object sender, EventArgs e)
@@ -233,8 +219,7 @@ namespace Authenticator
                 ApplicationBar.Buttons.Add(add);
                 ApplicationBar.Buttons.Add(select);
 
-                ApplicationBar.MenuItems.Add(about);
-                ApplicationBar.MenuItems.Add(donate);
+                ApplicationBar.MenuItems.Add(about);                
                 ApplicationBar.MenuItems.Add(settings);
             }
         }
