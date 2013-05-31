@@ -235,6 +235,7 @@ namespace Authenticator
 
                 ApplicationBar.MenuItems.Add(about);
                 ApplicationBar.MenuItems.Add(donate);
+                ApplicationBar.MenuItems.Add(settings);
             }
         }
 

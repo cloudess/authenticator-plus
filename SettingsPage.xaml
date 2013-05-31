@@ -30,8 +30,7 @@
 
         <StackPanel Grid.Row="1">            
             <toolkit:ToggleSwitch x:Name="TimeToggleSwitch" Header="Automatic time correction" IsChecked="true" Click="TimeToggleSwitch_Click">
-            </toolkit:ToggleSwitch>            
-            <TextBlock x:Name="txtEmpty" Grid.Row="1" Margin="24,0,0,0" Text="Settings." TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneAccentBrush}" />
+            </toolkit:ToggleSwitch>                        
         </StackPanel>        
     </Grid>   
 

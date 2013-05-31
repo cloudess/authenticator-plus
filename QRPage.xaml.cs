@@ -20,6 +20,22 @@ namespace Authenticator
             InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (!barcodeScanner.IsScanning)
+                barcodeScanner.StartScanning();
+        }
+
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            if (barcodeScanner.IsScanning)
+                barcodeScanner.StopScanning();
+        }
+
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             
@@ -28,7 +44,7 @@ namespace Authenticator
         private void QRCodeScanner_ScanComplete(object sender, JeffWilcox.Controls.ScanCompleteEventArgs e)
         {
             (App.Current as App).QRCode = e.Result;
-            NavigationService.GoBack();
+            NavigationService.GoBack();            
         }
 
         private void QRCodeScanner_Error(object sender, JeffWilcox.Controls.ScanFailureEventArgs e)
