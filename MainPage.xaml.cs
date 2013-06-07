@@ -63,7 +63,7 @@ namespace Authenticator
             delete.Click += btnDelete_Click;
 
             about = new ApplicationBarMenuItem();
-            about.Text = "about authenticator";
+            about.Text = "about authenticator+";
             about.Click += mnuAbout_Click;            
 
             settings = new ApplicationBarMenuItem();

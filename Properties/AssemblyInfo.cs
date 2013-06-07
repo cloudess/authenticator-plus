@@ -6,12 +6,12 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Authenticator")]
+[assembly: AssemblyTitle("Authenticator+")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Matt McCormick")]
-[assembly: AssemblyProduct("Authenticator")]
-[assembly: AssemblyCopyright("Copyright © Matt McCormick 2012")]
+[assembly: AssemblyProduct("Authenticator+")]
+[assembly: AssemblyCopyright("Copyright © Dima Stebaev 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
