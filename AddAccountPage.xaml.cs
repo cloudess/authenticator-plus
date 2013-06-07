@@ -113,17 +113,24 @@ namespace Authenticator
             if (e.State == WP7_Barcode_Library.CaptureState.Success)
             {
                 string str = e.BarcodeText;
-                str = str.Replace("otpauth://totp/", "");
-                string[] splitString = str.Split(Convert.ToChar("?"));
-                splitString[1] = splitString[1].Replace("secret=", "");
+                try
+                {
+                    str = str.Replace("otpauth://totp/", "");
+                    string[] splitString = str.Split(Convert.ToChar("?"));
+                    splitString[1] = splitString[1].Replace("secret=", "");
 
-                txtAccountName.Text = splitString[0];
-                txtSecretKey.Text = splitString[1];
+                    txtAccountName.Text = splitString[0];
+                    txtSecretKey.Text = splitString[1];
+
+                    return;
+                }
+                catch 
+                {                    
+                }
             }
-            else
-            {
-                MessageBox.Show("The barcode for your account could not be read. Please try again.", "Error", MessageBoxButton.OK);
-            }
+            
+            MessageBox.Show("The barcode for your account could not be read. Please try again.", "Error", MessageBoxButton.OK);
+            
         }
 
         #endregion
