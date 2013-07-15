@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <About>
   <App Title="Authenticator+"
-       Author="Dima Stebaev and Matt McCormick"
+       Author="Dima Stebaev"
        Description=""
        Publisher=""
        AdditionalNotes="This application is not endorsed or certified by Google or the Google Authenticator application.\n\nSwipe right to left for legal notices." />
@@ -13,10 +13,7 @@
               AppVersionLabel="Version:"
               AppAdditionalNotesLabel="Additional Notes:"
               AppReviewButtonContent="Review this app!">
-      <Links>
-        <Link NavigateUri="http://mbmccormick.com"
-              Content="http://mbmccormick.com"
-              Label="Matt McCormick:" />
+      <Links>        
         <Link NavigateUri="http://stebaev.com"
               Content="http://stebaev.com"
               Label="Dima Stebaev:" />
@@ -30,7 +27,7 @@
       In the event of an application error, crash, or problem, we may ask you to send an email message with crash information. Such an email may contain personally identifiable information, and it is your choice whether to send such a message. While using the app, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you and help you resolve support or assistance with the app. This will happen through a prompt asking for feedback, allowing you to send an e-mail message, and is not automatic. In order to provide you with a better experience, to improve the application and its services, we may share non-identifying information (such as the current page within the application being viewed) to serve you better and analyze and understand how the app is used. There are application preferences that may enable or turn off such functionality.
 
       Contacting the Author
-      If you have any questions about this Privacy Policy, please send an email to authenticator@mbmccormick.com.
+      If you have any questions about this Privacy Policy, please send an email to dima.stebaev@cloudessa.com.
 
     </Item>
     <Item Title="what's new?" Type="text">
